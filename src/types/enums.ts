@@ -21,3 +21,10 @@ export enum BadgeTone {
   MUTED = "muted",
   DANGER = "danger",
 }
+
+// How healthy an employee's remaining monthly credits are; drives the credit meter / progress bar colour.
+export enum CreditLevel {
+  HEALTHY = "healthy",
+  LOW = "low",
+  CRITICAL = "critical",
+}

@@ -26,7 +26,7 @@ export function RecordForm({ employeeId, remaining }: Props): React.JSX.Element 
     record({ employeeId, snackId: Number(values.snackId), qty: values.qty }, () => form.setValue("qty", 1));
 
   return (
-    <section aria-labelledby="record-title" className="flex flex-col gap-4 rounded-2xl border border-[var(--gos-border)] bg-[var(--gos-surface)] p-4 sm:p-5">
+    <section aria-labelledby="record-title" className="flex flex-col gap-4 self-start rounded-2xl border border-[var(--gos-border)] bg-[var(--gos-surface)] p-4 sm:p-5">
       <h2 id="record-title" className="text-lg font-semibold text-[var(--gos-text)]">Record a snack</h2>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">

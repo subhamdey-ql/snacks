@@ -1,15 +1,26 @@
 import { useMemo } from "react";
+import { Cookie, Pencil, Power } from "lucide-react";
 import { CommonTable, type CommonTableColumn } from "@/components/common/common-table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { IdentityCell } from "@/components/common/identity-cell";
+import { RowActionButton } from "@/components/common/row-action-button";
+import { StatusBadge } from "@/components/common/status-badge";
+import { CreditsPill } from "@/modules/snacks/components/credits-pill";
 import type { Snack } from "@/modules/snacks/types";
+import { BadgeTone } from "@/types/enums";
 
 const columns: readonly CommonTableColumn[] = [
-  { key: "name", label: "Name" },
-  { key: "credits", label: "Credits" },
+  { key: "name", label: "Snack", hideLabelOnMobile: true },
+  { key: "credits", label: "Price" },
   { key: "status", label: "Status" },
-  { key: "actions", label: "Actions", align: "right" },
+  { key: "actions", label: "Actions", align: "right", hideLabelOnMobile: true },
 ];
+
+// Same yellow cookie tile as the brand mark, at avatar size.
+const SNACK_TILE = (
+  <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--gos-yellow-light)] text-[var(--gos-orange)]">
+    <Cookie className="size-5" />
+  </span>
+);
 
 interface Props {
   readonly snacks: readonly Snack[];
@@ -22,21 +33,17 @@ export function SnackTable({ snacks, isSaving, onEdit, onToggle }: Props): React
   const data = useMemo(
     () =>
       snacks.map((s) => ({
-        name: <span className="block max-w-[10rem] whitespace-normal [overflow-wrap:anywhere] sm:max-w-xs">{s.name}</span>,
-        credits: s.credits,
-        status: <Badge variant={s.active ? "default" : "secondary"}>{s.active ? "Active" : "Inactive"}</Badge>,
+        name: <IdentityCell leading={SNACK_TILE} title={s.name} />,
+        credits: <CreditsPill credits={s.credits} />,
+        status: <StatusBadge tone={s.active ? BadgeTone.SUCCESS : BadgeTone.MUTED}>{s.active ? "Active" : "Inactive"}</StatusBadge>,
         actions: (
-          <div className="flex flex-wrap justify-end gap-2">
-            <Button variant="outline" size="sm" className="h-10 sm:h-7" onClick={() => onEdit(s)}>
-              Edit
-            </Button>
-            <Button variant="outline" size="sm" className="h-10 sm:h-7" disabled={isSaving} onClick={() => onToggle(s)}>
-              {s.active ? "Deactivate" : "Activate"}
-            </Button>
+          <div className="flex flex-wrap gap-2 md:justify-end">
+            <RowActionButton icon={Pencil} label="Edit" onClick={() => onEdit(s)} />
+            <RowActionButton icon={Power} label={s.active ? "Deactivate" : "Activate"} disabled={isSaving} onClick={() => onToggle(s)} />
           </div>
         ),
       })),
     [snacks, isSaving, onEdit, onToggle],
   );
-  return <CommonTable columns={columns} data={data} />;
+  return <CommonTable columns={columns} data={data} stackOnMobile />;
 }

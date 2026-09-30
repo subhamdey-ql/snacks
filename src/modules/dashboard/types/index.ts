@@ -47,4 +47,3 @@ export interface DashboardSummary {
   monthEmployees: number;
 }
 
-export { CreditLevel } from "@/modules/dashboard/types/enums";

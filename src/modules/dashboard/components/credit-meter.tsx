@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
-import { CreditLevel } from "@/modules/dashboard/types/enums";
+import { CreditLevel } from "@/types/enums";
 import type { Balance } from "@/modules/dashboard/types";
-import { creditLevel } from "@/modules/dashboard/utils/credit-utils";
+import { creditLevel } from "@/lib/credit-level";
 
 const R = 52;
 const CIRCUMFERENCE = 2 * Math.PI * R;

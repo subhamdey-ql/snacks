@@ -2,17 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { parseAsInteger, useQueryState } from "nuqs";
+import { FileUp, Plus, Users } from "lucide-react";
 import { CommonButton } from "@/components/common/common-button";
-import { CommonLoader } from "@/components/common/common-loader";
 import { DataEmptyHandler } from "@/components/common/data-empty-handler";
+import { PageHeader } from "@/components/common/page-header";
 import { Pagination } from "@/components/common/pagination";
-import { Input } from "@/components/ui/input";
+import { TableSkeleton } from "@/components/common/table-skeleton";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { EmployeeCsvImport } from "@/modules/employees/components/employee-csv-import";
 import { EmployeeFormDialog } from "@/modules/employees/components/employee-form-dialog";
+import { EmployeeSearchInput } from "@/modules/employees/components/employee-search-input";
 import { EmployeeTable } from "@/modules/employees/components/employee-table";
 import { useEmployeeActions } from "@/modules/employees/hooks/useEmployeeActions";
 import { useEmployeeAPI } from "@/modules/employees/hooks/useEmployeeAPI";
 import type { Employee } from "@/modules/employees/types";
+import { EMPLOYEE_CSV_INPUT_ID } from "@/modules/employees/utils/employee-display";
 import { useDebounce } from "@/hooks/useDebounce";
 
 const PAGE_SIZE = 10;
@@ -49,24 +54,47 @@ export function EmployeesTemplate(): React.JSX.Element {
   };
 
   return (
-    <div className="flex min-w-0 flex-col gap-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <Input className="w-full sm:w-64" placeholder="Search name or code" value={text} onChange={(e) => setText(e.target.value)} />
-        <CommonButton onClick={() => openDialog()}>Add employee</CommonButton>
-      </div>
-      <EmployeeCsvImport />
-      {isLoading || !data ? (
-        <CommonLoader />
-      ) : (
-        <DataEmptyHandler data={data.data} emptyMessage="No employees found.">
-          <EmployeeTable
-            employees={data.data}
-            isSaving={isSaving}
-            onEdit={openDialog}
-            onToggle={(e) => saveEmployee({ id: e.id, code: e.code, name: e.name, type: e.type, active: !e.active })}
-          />
-        </DataEmptyHandler>
-      )}
+    <div className="stagger flex min-w-0 flex-col gap-4">
+      <PageHeader
+        title="Employees"
+        description="Everyone who can take snacks"
+        actions={
+          <>
+            {/* Opens the import panel's file picker directly; the panel below then shows the chosen file. */}
+            <Button variant="outline" className="h-10 gap-1.5 px-3.5" onClick={() => document.getElementById(EMPLOYEE_CSV_INPUT_ID)?.click()}>
+              <FileUp className="size-4" aria-hidden />
+              Import CSV
+            </Button>
+            <CommonButton className="gap-1.5 sm:h-10" onClick={() => openDialog()}>
+              <Plus className="size-4" aria-hidden />
+              Add employee
+            </CommonButton>
+          </>
+        }
+      />
+      <Card className="gap-4 p-4 sm:p-5">
+        <EmployeeSearchInput value={text} onChange={setText} />
+        <EmployeeCsvImport />
+      </Card>
+      <Card className="gap-0 px-4 py-2 sm:px-5">
+        {isLoading || !data ? (
+          <TableSkeleton />
+        ) : (
+          <DataEmptyHandler
+            data={data.data}
+            icon={Users}
+            emptyMessage={q ? "No employees match that search." : "No employees yet."}
+            hint={q ? "Try a different name or code." : "Add your first employee or import a CSV."}
+          >
+            <EmployeeTable
+              employees={data.data}
+              isSaving={isSaving}
+              onEdit={openDialog}
+              onToggle={(e) => saveEmployee({ id: e.id, code: e.code, name: e.name, type: e.type, active: !e.active })}
+            />
+          </DataEmptyHandler>
+        )}
+      </Card>
       {data && <Pagination page={data.pagination.page} totalPages={data.pagination.totalPages} onPageChange={setPage} />}
       <EmployeeFormDialog open={dialogOpen} employee={editing} onClose={() => setDialogOpen(false)} />
     </div>

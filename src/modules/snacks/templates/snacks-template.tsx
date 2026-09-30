@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Cookie, Plus } from "lucide-react";
 import { CommonButton } from "@/components/common/common-button";
-import { CommonLoader } from "@/components/common/common-loader";
 import { DataEmptyHandler } from "@/components/common/data-empty-handler";
-import { Checkbox } from "@/components/ui/checkbox";
+import { PageHeader } from "@/components/common/page-header";
+import { TableSkeleton } from "@/components/common/table-skeleton";
+import { Card } from "@/components/ui/card";
+import { ShowInactiveToggle } from "@/modules/snacks/components/show-inactive-toggle";
 import { SnackFormDialog } from "@/modules/snacks/components/snack-form-dialog";
 import { SnackTable } from "@/modules/snacks/components/snack-table";
 import { useSnackActions } from "@/modules/snacks/hooks/useSnackActions";
@@ -24,26 +27,39 @@ export function SnacksTemplate(): React.JSX.Element {
   };
 
   return (
-    <div className="flex min-w-0 flex-col gap-4">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <CommonButton onClick={() => openDialog()}>Add snack</CommonButton>
-        <label className="flex items-center gap-2 text-sm">
-          <Checkbox checked={includeInactive} onCheckedChange={(v) => setIncludeInactive(v)} />
-          Show inactive
-        </label>
-      </div>
-      {isLoading ? (
-        <CommonLoader />
-      ) : (
-        <DataEmptyHandler data={data} emptyMessage="No snacks yet. Add your first snack.">
-          <SnackTable
-            snacks={data}
-            isSaving={isSaving}
-            onEdit={openDialog}
-            onToggle={(s) => saveSnack({ id: s.id, name: s.name, credits: s.credits, active: !s.active })}
-          />
-        </DataEmptyHandler>
-      )}
+    <div className="stagger flex min-w-0 flex-col gap-4">
+      <PageHeader
+        title="Snacks"
+        description="What's on the counter and what it costs"
+        actions={
+          <CommonButton className="gap-1.5 sm:h-10" onClick={() => openDialog()}>
+            <Plus className="size-4" aria-hidden />
+            Add snack
+          </CommonButton>
+        }
+      />
+      <Card className="gap-0 px-4 py-2 sm:px-5">
+        <div className="-mx-1 border-b border-[var(--gos-border)] pb-2">
+          <ShowInactiveToggle checked={includeInactive} onChange={setIncludeInactive} />
+        </div>
+        {isLoading ? (
+          <TableSkeleton rows={4} />
+        ) : (
+          <DataEmptyHandler
+            data={data}
+            icon={Cookie}
+            emptyMessage={includeInactive ? "No snacks yet." : "No active snacks."}
+            hint={includeInactive ? "Add your first snack to start recording." : "Add a snack, or show inactive ones to bring one back."}
+          >
+            <SnackTable
+              snacks={data}
+              isSaving={isSaving}
+              onEdit={openDialog}
+              onToggle={(s) => saveSnack({ id: s.id, name: s.name, credits: s.credits, active: !s.active })}
+            />
+          </DataEmptyHandler>
+        )}
+      </Card>
       <SnackFormDialog open={dialogOpen} snack={editing} onClose={() => setDialogOpen(false)} />
     </div>
   );

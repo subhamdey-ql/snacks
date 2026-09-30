@@ -27,7 +27,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>,
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
 	({ className, inputContainerClassName, prefixIconClassName, type, variant, PrefixIcon, ...props }, ref) => {
 		return (
-			<div className={cn("flex h-11 w-full items-center", inputContainerClassName)}>
+			<div className={cn("flex w-full items-center", inputContainerClassName)}>
 				{PrefixIcon && <div className={cn("pl-3", prefixIconClassName)}>{PrefixIcon}</div>}
 				<input type={type} className={cn(inputVariants({ className, variant }))} ref={ref} {...props} />
 			</div>
