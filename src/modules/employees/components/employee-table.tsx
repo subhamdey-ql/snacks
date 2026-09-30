@@ -10,10 +10,10 @@ import { EMPLOYEE_TYPE_BADGE } from "@/modules/employees/utils/employee-display"
 import { BadgeTone } from "@/types/enums";
 
 const columns: readonly CommonTableColumn[] = [
-  { key: "name", label: "Employee", hideLabelOnMobile: true },
+  { key: "name", label: "Employee" },
   { key: "type", label: "Type" },
   { key: "status", label: "Status" },
-  { key: "actions", label: "Actions", align: "right", hideLabelOnMobile: true },
+  { key: "actions", label: "Actions", align: "right", isActions: true },
 ];
 
 interface Props {

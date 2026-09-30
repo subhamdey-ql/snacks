@@ -41,7 +41,7 @@ const DropdownMenuItem = React.forwardRef<
 	<DropdownMenuPrimitive.Item
 		ref={ref}
 		className={cn(
-			"relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-xs outline-none transition-colors focus:bg-muted",
+			"relative flex min-h-11 cursor-pointer select-none items-center rounded-lg px-3 py-1.5 text-sm outline-none md-fine:min-h-9 transition-colors focus:bg-muted",
 			selected ? "bg-[var(--gos-blue-light)] font-medium text-[var(--gos-blue-text)]" : "font-normal hover:bg-muted",
 			className
 		)}

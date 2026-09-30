@@ -35,7 +35,7 @@ export function EntryItem({ entry: e, disabled, onUndo }: Props): React.JSX.Elem
         </span>
       </div>
       {!voided && (
-        <Button variant="ghost" size="sm" className="h-10 text-[var(--gos-text-muted)] hover:text-[var(--gos-red)] sm:h-8" disabled={disabled} onClick={onUndo}>
+        <Button variant="ghost" size="sm" className="h-11 px-3 text-[var(--gos-text-muted)] hover:text-[var(--gos-red)] md-fine:h-10" disabled={disabled} onClick={onUndo}>
           <Undo2 className="size-4" aria-hidden />
           Undo
         </Button>

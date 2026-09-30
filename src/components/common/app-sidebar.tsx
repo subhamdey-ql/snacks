@@ -11,11 +11,11 @@ import { cn } from "@/lib/utils";
 export function AppSidebar({ footer }: { readonly footer?: React.ReactNode }): React.JSX.Element {
   const pathname = usePathname();
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-[var(--gos-border)] bg-[var(--gos-surface)] px-4 py-6 md:flex">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-[var(--gos-border)] bg-[var(--gos-surface)] py-6 pr-4 pl-[max(1rem,env(safe-area-inset-left))] md:flex">
       <div className="px-2">
         <BrandMark />
       </div>
-      <nav aria-label="Main" className="mt-8 flex flex-1 flex-col gap-1">
+      <nav aria-label="Main" className="mt-8 flex flex-1 flex-col gap-2">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isNavActive(href, pathname);
           return (

@@ -21,7 +21,7 @@ export function LoginTemplate(): React.JSX.Element {
   return (
     <div className="flex min-h-dvh flex-1 flex-col lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
       <LoginBrandPanel />
-      <div className="relative -mt-12 flex flex-1 justify-center px-4 pb-10 lg:mt-0 lg:items-center lg:px-10">
+      <div className="relative -mt-12 flex flex-1 justify-center pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(2.5rem+env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] lg:mt-0 lg:items-center lg:px-10">
         <Card className="animate-fade-in-up h-fit w-full max-w-sm gap-5 py-6 shadow-[var(--gos-shadow-lg)]">
           <CardHeader className="px-6">
             <h1 className="text-2xl font-bold tracking-tight text-[var(--gos-text)]">Welcome back</h1>
@@ -40,7 +40,7 @@ export function LoginTemplate(): React.JSX.Element {
                     handlePasswordVisibility: () => setShowPassword((v) => !v),
                   }}
                 />
-                <CommonButton type="submit" className="h-11 w-full gap-2 text-base sm:h-11" disabled={isPending}>
+                <CommonButton type="submit" className="h-12 w-full gap-2 text-base md-fine:h-12" disabled={isPending}>
                   {isPending && <Loader2 className="size-4 animate-spin" aria-hidden />}
                   {isPending ? "Logging in…" : "Log in"}
                 </CommonButton>

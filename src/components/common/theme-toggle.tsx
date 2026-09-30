@@ -17,7 +17,7 @@ export function ThemeToggle(): React.JSX.Element {
     <Button
       variant="ghost"
       size="icon"
-      className="size-10 rounded-xl text-[var(--gos-text-muted)] hover:text-[var(--gos-text)]"
+      className="size-11 rounded-xl md-fine:size-10 text-[var(--gos-text-muted)] hover:text-[var(--gos-text)]"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
     >

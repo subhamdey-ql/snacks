@@ -5,15 +5,16 @@ import { usePathname } from "next/navigation";
 import { NAV_ITEMS, isNavActive } from "@/components/common/nav-items";
 import { cn } from "@/lib/utils";
 
-// <md only: fixed tab bar; each tab is a full-height (>=64px) tap target. Safe-area padding clears the iOS home bar.
+// <md only: fixed tab bar; each tab is a full-height (>=64px) tap target, 8px apart. Safe-area padding clears the
+// iOS home bar and landscape notches.
 export function MobileBottomNav(): React.JSX.Element {
   const pathname = usePathname();
   return (
     <nav
       aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--gos-border)] bg-[var(--gos-surface)]/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-md md:hidden"
+      className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--gos-border)] bg-[var(--gos-surface)]/90 pr-[max(0.5rem,env(safe-area-inset-right))] pb-[env(safe-area-inset-bottom)] pl-[max(0.5rem,env(safe-area-inset-left))] backdrop-blur-md md:hidden"
     >
-      <ul className="grid grid-cols-5">
+      <ul className="grid grid-cols-5 gap-2">
         {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
           const active = isNavActive(href, pathname);
           return (

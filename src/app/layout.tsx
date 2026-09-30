@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,16 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Snacks Tracker",
   description: "Snacks credit tracker",
+};
+
+// viewport-fit=cover lets the page draw under notches/home bars; the shell pads itself with env(safe-area-inset-*).
+// resizes-visual (the modern default, stated explicitly): the on-screen keyboard overlays the page instead of
+// shrinking the layout, so the fixed bottom tab bar stays behind the keyboard rather than riding up over the field.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  interactiveWidget: "resizes-visual",
 };
 
 // suppressHydrationWarning: next-themes sets the theme class on <html> before React hydrates.

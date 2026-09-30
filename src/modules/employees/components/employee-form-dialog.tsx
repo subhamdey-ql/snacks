@@ -57,7 +57,7 @@ export function EmployeeFormDialog({ open, employee, onClose }: Props): React.JS
               fieldConfig={{ name: "type", fieldVariant: "selectField", label: "Type", options: employeeTypeOptions, placeHolder: "Type" }}
             />
             <DialogFooter className="mt-2">
-              <DialogClose render={<Button variant="ghost" className="h-10 sm:h-9" />}>Cancel</DialogClose>
+              <DialogClose render={<Button variant="ghost" className="h-11 md-fine:h-10" />}>Cancel</DialogClose>
               <CommonButton type="submit" disabled={isSaving}>
                 {isSaving ? "Saving…" : "Save"}
               </CommonButton>

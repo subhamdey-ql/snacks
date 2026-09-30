@@ -75,7 +75,7 @@ export function SettingsTemplate(): React.JSX.Element {
             />
           </div>
           <InlineNotice tone={BadgeTone.INFO}>Applies from this month onward. Past months keep their old value.</InlineNotice>
-          <CommonButton type="submit" className="w-full sm:h-10 sm:w-fit sm:px-6" disabled={isSaving}>
+          <CommonButton type="submit" className="w-full sm:w-fit sm:px-6" disabled={isSaving}>
             {isSaving ? "Saving…" : "Save"}
           </CommonButton>
         </form>

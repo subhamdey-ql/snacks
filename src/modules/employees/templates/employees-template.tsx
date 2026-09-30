@@ -61,11 +61,11 @@ export function EmployeesTemplate(): React.JSX.Element {
         actions={
           <>
             {/* Opens the import panel's file picker directly; the panel below then shows the chosen file. */}
-            <Button variant="outline" className="h-10 gap-1.5 px-3.5" onClick={() => document.getElementById(EMPLOYEE_CSV_INPUT_ID)?.click()}>
+            <Button variant="outline" className="h-11 gap-1.5 px-3.5 md-fine:h-10" onClick={() => document.getElementById(EMPLOYEE_CSV_INPUT_ID)?.click()}>
               <FileUp className="size-4" aria-hidden />
               Import CSV
             </Button>
-            <CommonButton className="gap-1.5 sm:h-10" onClick={() => openDialog()}>
+            <CommonButton className="gap-1.5" onClick={() => openDialog()}>
               <Plus className="size-4" aria-hidden />
               Add employee
             </CommonButton>

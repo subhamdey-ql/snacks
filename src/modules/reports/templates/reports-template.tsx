@@ -33,7 +33,7 @@ export function ReportsTemplate(): React.JSX.Element {
             <Input
               type="month"
               aria-label="Month"
-              className="h-10 w-full sm:w-44"
+              className="w-full sm:w-44 md-fine:h-10"
               value={m && MONTH_RE.test(m) ? m : (report?.month ?? "")}
               onChange={(e) => setM(e.target.value || null)}
             />
@@ -41,7 +41,7 @@ export function ReportsTemplate(): React.JSX.Element {
               // Base UI button has no asChild; `render` swaps in a plain link (nativeButton off since it is an <a>).
               <Button
                 variant="outline"
-                className="h-10 gap-1.5 px-3.5"
+                className="h-11 gap-1.5 px-3.5 md-fine:h-10"
                 nativeButton={false}
                 render={<a href={`/api/reports/export?m=${report.month}`} />}
               >

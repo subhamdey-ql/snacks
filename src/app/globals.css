@@ -3,6 +3,9 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+/* Compact control sizing only for a wide screen driven by a mouse/trackpad. Touch screens (phones in any
+   orientation, tablets) keep the 44px tap targets even at md+ widths, e.g. a phone held in landscape. */
+@custom-variant md-fine (@media (width >= 48rem) and (pointer: fine));
 
 @theme inline {
   --color-background: var(--background);
@@ -174,6 +177,14 @@
   }
   html.dark {
     color-scheme: dark;
+  }
+  /* Phones: when the browser scrolls a focused field into view (keyboard opening, tabbing), keep it clear of the
+     sticky header (~64px) and the fixed bottom tab bar (64px), both plus their safe-area insets. */
+  @media (width < 48rem) {
+    html {
+      scroll-padding-top: calc(4.5rem + env(safe-area-inset-top));
+      scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
+    }
   }
   body {
     color: var(--gos-text);

@@ -9,7 +9,7 @@ import { RemainingBar } from "@/modules/reports/components/remaining-bar";
 import type { EmployeeReportRow } from "@/modules/reports/types";
 
 const columns: readonly CommonTableColumn[] = [
-  { key: "name", label: "Employee", hideLabelOnMobile: true },
+  { key: "name", label: "Employee" },
   { key: "allowance", label: "Allowance", align: "right" },
   { key: "used", label: "Used", align: "right" },
   { key: "remaining", label: "Remaining", align: "right" },

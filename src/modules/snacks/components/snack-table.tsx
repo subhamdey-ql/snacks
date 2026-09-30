@@ -9,10 +9,10 @@ import type { Snack } from "@/modules/snacks/types";
 import { BadgeTone } from "@/types/enums";
 
 const columns: readonly CommonTableColumn[] = [
-  { key: "name", label: "Snack", hideLabelOnMobile: true },
+  { key: "name", label: "Snack" },
   { key: "credits", label: "Price" },
   { key: "status", label: "Status" },
-  { key: "actions", label: "Actions", align: "right", hideLabelOnMobile: true },
+  { key: "actions", label: "Actions", align: "right", isActions: true },
 ];
 
 // Same yellow cookie tile as the brand mark, at avatar size.

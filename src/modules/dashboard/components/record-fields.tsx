@@ -31,7 +31,7 @@ export function RecordFields({ form, snacks, disabled }: Props): React.JSX.Eleme
           <FormInputWrapper form={form} fieldConfig={{ name: "qty", label: "Quantity", fieldVariant: "numberInput", placeHolder: "Qty" }} />
         </div>
       </div>
-      <CommonButton type="submit" disabled={disabled} className="h-12 w-full text-base sm:h-12">
+      <CommonButton type="submit" disabled={disabled} className="h-12 w-full text-base md-fine:h-12">
         Record
       </CommonButton>
     </div>

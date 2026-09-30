@@ -32,7 +32,7 @@ export function SnacksTemplate(): React.JSX.Element {
         title="Snacks"
         description="What's on the counter and what it costs"
         actions={
-          <CommonButton className="gap-1.5 sm:h-10" onClick={() => openDialog()}>
+          <CommonButton className="gap-1.5" onClick={() => openDialog()}>
             <Plus className="size-4" aria-hidden />
             Add snack
           </CommonButton>

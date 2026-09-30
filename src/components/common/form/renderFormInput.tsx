@@ -78,14 +78,14 @@ export function RenderFormInput<TData extends FieldValues>({ field, sectionField
 						id={formItemId}
 						type={sectionField.showPassword ? "text" : "password"}
 						placeholder={sectionField.placeHolder}
-						className="pr-10"
+						className="pr-12"
 						{...field}
 					/>
 					<button
 						type="button"
 						aria-label={sectionField.showPassword ? "Hide password" : "Show password"}
 						onClick={sectionField.handlePasswordVisibility}
-						className="absolute right-2 flex h-10 w-10 items-center sm:h-7 sm:w-7 justify-center rounded-lg text-muted-foreground hover:bg-transparent hover:text-foreground"
+						className="absolute right-0 flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-transparent hover:text-foreground"
 					>
 						{sectionField.showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 					</button>

@@ -22,7 +22,7 @@ export function AppProviders({ children }: { children: React.ReactNode }): React
       <QueryClientProvider client={client}>
         <NuqsAdapter>{children}</NuqsAdapter>
         {/* Lifted above the fixed mobile bottom nav (<md); normal offset on desktop. */}
-        <Toaster position="bottom-center" containerClassName="bottom-24! md:bottom-4!" toastOptions={{ duration: 3000, style: TOAST_STYLE }} />
+        <Toaster position="bottom-center" containerClassName="bottom-[calc(6rem+env(safe-area-inset-bottom))]! md:bottom-4!" toastOptions={{ duration: 3000, style: TOAST_STYLE }} />
       </QueryClientProvider>
     </ThemeProvider>
   );
