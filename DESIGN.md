@@ -38,6 +38,7 @@ Consumption id, employeeId, snackId, qty, creditsCharged,
 | `POST /api/employees/import` | CSV `code,name,WFO\|HYBRID`; imports good rows (an imported row re-activates an inactive employee, like `POST /api/employees`), reports bad lines |
 | `GET /api/employees/:id/month` | Employee, this month's balance and entries |
 | `GET/POST /api/snacks`, `PATCH /api/snacks/:id` | Snack catalog (`GET ?includeInactive=true` lists all; qty per entry is 1..20) (POST on an existing name re-activates and re-prices) |
+| `GET /api/dashboard/summary` | Home tiles: `{ todayEntries, monthCredits, monthEmployees }` (non-voided entries, IST day/month, aggregated in Postgres) |
 | `GET/PUT /api/settings/allowance` | Current monthly credits per type; PUT applies from this month |
 | `POST /api/consumptions` | Record `{employeeId, snackId, qty}` (400 invalid, 404 missing, 422 insufficient) |
 | `POST /api/consumptions/:id/void` | Undo; current IST month only (422 otherwise) |
@@ -53,6 +54,14 @@ Consumption id, employeeId, snackId, qty, creditsCharged,
 **Dashboard:** after recording, the selected snack stays selected and only the quantity resets to 1.
 
 **Reports:** `groupBy` in Postgres per employee and per snack. Active employees plus deactivated ones with usage that month are listed.
+
+
+## 5a. UI (visual design)
+- **Look:** "fresh & friendly": brand blue (`--gos-blue`) primary, warm yellow/orange and green accents, rounded-2xl cards with soft shadows, big numerals. Inter is the only font. Every colour is a `--gos-*` token in `globals.css` with light and dark values; dark mode uses `next-themes` (class strategy, system default, no flash).
+- **Shell:** from `md` (768px) a fixed left sidebar (brand mark, icon nav, theme toggle, Log out); below `md` a sticky top bar plus a bottom tab bar (Home, Employees, Snacks, Reports, Settings) that respects the safe areas. Login is a gradient brand panel with a centred card.
+- **Dashboard:** search hero, summary tiles, then for a selected employee an initials avatar, a circular credit meter (green above 50% left, amber 20-50%, red below 20%; `src/lib/credit-level.ts`), the record form with a cost preview, and this month's entries as a timeline with Undo.
+- **Shared components** (`src/components/common/`): `CommonButton`, `CommonTable` (with `stackOnMobile`: rows become stacked cards with a full-width action row below a 36rem container), `DataEmptyHandler` + `EmptyState`, `PageHeader`, `StatusBadge` (BadgeTone), `InlineNotice`, `UserAvatar`, `StatCard`, `IdentityCell`, `RowActionButton`, `FormDialogHeader`, `TableSkeleton`, `Pagination`, `ScrollableList`, `ThemeToggle`, and the shell pieces (`AppSidebar`, `MobileHeader`, `MobileBottomNav`, `BrandMark`).
+- **Mobile rules:** phone layout is the base; tap targets are at least 40px (44px for table/card actions and dialog buttons); inputs are 16px; long names wrap (`[overflow-wrap:anywhere]`); the page never scrolls sideways. Motion is limited to short transitions and is off under `prefers-reduced-motion`.
 
 ## 6. Auth
 `ADMIN_PASSWORD` and `SESSION_SECRET` from env. Login compares in constant time and sets an HMAC-signed httpOnly cookie (7 days). The `(desk)` layout is a server component that redirects to `/login` without a valid session; every non-public API route is wrapped in `route()` which returns 401.

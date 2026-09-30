@@ -16,25 +16,28 @@ export interface CommonTableColumn {
 interface CommonTableProps {
   readonly columns: readonly CommonTableColumn[];
   readonly data: readonly Record<string, React.ReactNode>[];
-  // Below md, render each row as a stacked card instead of a wide scrolling table.
+  // When the table's own box is narrower than 36rem (every phone, and a tablet or landscape phone next to the
+  // sidebar), render each row as a stacked card instead of a wide, cramped or sideways-scrolling table.
   readonly stackOnMobile?: boolean;
 }
 
-// Stacking is CSS-only: the same <table> DOM is kept (no duplicated cells or buttons, one source of truth for
-// screen readers), the header row is hidden and every labelled cell prints its column label from `data-label`
-// via ::before. The first column is the card title; the actions column is the card's full-width button row.
+// Stacking is CSS-only and keyed to a container query (the wrapper's width, not the viewport's), because the
+// sidebar appears at md and leaves a 768px tablet only ~400px for the table. It keeps the same <table> DOM
+// (no duplicated cells or buttons, one source of truth for screen readers): the header row is hidden and every
+// labelled cell prints its column label from `data-label` via ::before. The first column is the card title; the
+// actions column is the card's full-width button row.
 const STACK = {
-  table: "max-md:block",
-  header: "max-md:hidden",
-  body: "max-md:block",
+  table: "@max-xl:block",
+  header: "@max-xl:hidden",
+  body: "@max-xl:block",
   // Two-column grid: labelled cells pair up side by side, title/actions span the full width.
-  row: "max-md:grid max-md:grid-cols-2 max-md:gap-x-4 max-md:gap-y-3 max-md:px-1 max-md:py-4 max-md:hover:bg-transparent",
-  cell: "max-md:flex max-md:min-w-0 max-md:flex-col max-md:items-start max-md:gap-1 max-md:p-0 max-md:text-left max-md:whitespace-normal max-md:before:text-xs max-md:before:font-medium max-md:before:text-muted-foreground max-md:before:content-[attr(data-label)]",
-  bare: "max-md:col-span-2 max-md:before:content-none",
-  hidden: "max-md:hidden",
+  row: "@max-xl:grid @max-xl:grid-cols-2 @max-xl:gap-x-4 @max-xl:gap-y-3 @max-xl:px-1 @max-xl:py-4 @max-xl:hover:bg-transparent",
+  cell: "@max-xl:flex @max-xl:min-w-0 @max-xl:flex-col @max-xl:items-start @max-xl:gap-1 @max-xl:p-0 @max-xl:text-left @max-xl:whitespace-normal @max-xl:before:text-xs @max-xl:before:font-medium @max-xl:before:text-muted-foreground @max-xl:before:content-[attr(data-label)]",
+  bare: "@max-xl:col-span-2 @max-xl:before:content-none",
+  hidden: "@max-xl:hidden",
   // Children stretch to the full width and every button/link inside shares the row equally at 44px tall.
   actions:
-    "max-md:items-stretch max-md:*:w-full max-md:[&_:is(button,a)]:h-11 max-md:[&_:is(button,a)]:flex-1 max-md:border-t max-md:border-[var(--gos-border)] max-md:pt-3",
+    "@max-xl:items-stretch @max-xl:*:w-full @max-xl:[&_:is(button,a)]:h-11 @max-xl:[&_:is(button,a)]:flex-1 @max-xl:border-t @max-xl:border-[var(--gos-border)] @max-xl:pt-3",
 } as const;
 
 function stackedCellClass(column: CommonTableColumn, index: number): string {
@@ -47,7 +50,7 @@ function stackedCellClass(column: CommonTableColumn, index: number): string {
 
 // Config-driven table; without stackOnMobile, shadcn's Table scrolls horizontally on narrow screens.
 export function CommonTable({ columns, data, stackOnMobile = false }: CommonTableProps): React.JSX.Element {
-  return (
+  const table = (
     <Table className={cn(stackOnMobile && STACK.table)}>
       <TableHeader className={cn(stackOnMobile && STACK.header)}>
         <TableRow className="hover:bg-transparent">
@@ -78,4 +81,5 @@ export function CommonTable({ columns, data, stackOnMobile = false }: CommonTabl
       </TableBody>
     </Table>
   );
+  return stackOnMobile ? <div className="@container">{table}</div> : table;
 }

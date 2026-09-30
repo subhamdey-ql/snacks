@@ -17,7 +17,7 @@ export function SnackReportTable({ rows }: { readonly rows: readonly SnackReport
   const data = useMemo(() => {
     const max = Math.max(1, ...rows.map((r) => r.qty));
     return rows.map((r) => ({
-      name: <span className="block max-w-[10rem] font-medium whitespace-normal [overflow-wrap:anywhere] sm:max-w-xs">{r.name}</span>,
+      name: <span className="block min-w-32 max-w-[10rem] font-medium whitespace-normal [overflow-wrap:anywhere] sm:max-w-xs">{r.name}</span>,
       qty: (
         <div className="flex items-center justify-end gap-2.5">
           <Progress aria-hidden value={(r.qty / max) * 100} className="hidden w-20 sm:flex" indicatorClassName="bg-[var(--gos-yellow)]" />
