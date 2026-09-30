@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { endSession } from "@/server/auth/session";
-import { route } from "@/server/http";
+import { publicRoute } from "@/server/http";
 
-export const POST = route(async () => {
+export const POST = publicRoute(async () => {
   await endSession();
   return NextResponse.json({ ok: true });
-}, { public: true });
+});

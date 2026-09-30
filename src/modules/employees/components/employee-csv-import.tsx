@@ -34,7 +34,7 @@ export function EmployeeCsvImport(): React.JSX.Element {
             Import from a CSV file
           </Label>
           <p className="text-sm text-[var(--gos-text-muted)] [overflow-wrap:anywhere]">
-            One employee per line: <span className="font-medium text-[var(--gos-text)]">code,name,WFO|HYBRID</span>. Up to 1 MB and 5000 rows.
+            One employee per line: <span className="font-medium text-[var(--gos-text)]">code,name,WFO|HYBRID,email</span>. The email is their login. Up to 1 MB and 5000 rows.
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { CreditLevel } from "@/types/enums";
-import type { Balance } from "@/modules/dashboard/types";
+import type { CreditBalance } from "@/types/api";
 import { creditLevel } from "@/lib/credit-level";
 
 const R = 52;
@@ -13,7 +13,7 @@ const STROKE: Record<CreditLevel, string> = {
 
 // Ring of remaining/allowance. Negative remaining draws as empty; allowance 0 draws an empty neutral ring.
 // The dashoffset transition is switched off globally under prefers-reduced-motion.
-export function CreditMeter({ balance: { allowance, used, remaining } }: { readonly balance: Balance }): React.JSX.Element {
+export function CreditMeter({ balance: { allowance, used, remaining } }: { readonly balance: CreditBalance }): React.JSX.Element {
   const fraction = allowance > 0 ? Math.min(1, Math.max(0, remaining / allowance)) : 0;
   const stroke = allowance > 0 ? STROKE[creditLevel(remaining, allowance)] : "stroke-[var(--gos-neutral)]";
   return (

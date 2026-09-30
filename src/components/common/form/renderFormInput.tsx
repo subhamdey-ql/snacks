@@ -17,6 +17,11 @@ export interface INumberInputFieldVariant {
 
 export interface IInputFieldVariant {
 	fieldVariant: "input";
+	// Optional browser hints (mobile keyboard, autofill, length cap) for inputs like email or a one-time code.
+	type?: React.HTMLInputTypeAttribute;
+	inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
+	autoComplete?: string;
+	maxLength?: number;
 }
 
 export interface ISelectFieldVariant {
@@ -106,6 +111,18 @@ export function RenderFormInput<TData extends FieldValues>({ field, sectionField
 				/>
 			);
 		case "input":
-			return <Input {...field} id={formItemId} value={field.value ?? ""} placeholder={sectionField.placeHolder} className={sectionField.className} />;
+			return (
+				<Input
+					{...field}
+					id={formItemId}
+					value={field.value ?? ""}
+					placeholder={sectionField.placeHolder}
+					className={sectionField.className}
+					type={sectionField.type}
+					inputMode={sectionField.inputMode}
+					autoComplete={sectionField.autoComplete}
+					maxLength={sectionField.maxLength}
+				/>
+			);
 	}
 }

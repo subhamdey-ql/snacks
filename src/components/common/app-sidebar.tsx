@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/common/brand-mark";
-import { NAV_ITEMS, isNavActive } from "@/components/common/nav-items";
+import { NAV_BY_AREA, isNavActive } from "@/components/common/nav-items";
 import { ThemeMenu } from "@/components/common/theme-menu";
 import { cn } from "@/lib/utils";
+import type { NavArea } from "@/types/enums";
 
 // `footer` = the logout control, composed by the layout so this shared component imports no module.
-export function AppSidebar({ footer }: { readonly footer?: React.ReactNode }): React.JSX.Element {
+export function AppSidebar({ area, footer }: { readonly area: NavArea; readonly footer?: React.ReactNode }): React.JSX.Element {
   const pathname = usePathname();
   return (
     <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-[var(--gos-border)] bg-[var(--gos-surface)] py-6 pr-4 pl-[max(1rem,env(safe-area-inset-left))] md:flex">
@@ -16,7 +17,7 @@ export function AppSidebar({ footer }: { readonly footer?: React.ReactNode }): R
         <BrandMark />
       </div>
       <nav aria-label="Main" className="mt-8 flex flex-1 flex-col gap-2">
-        {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
+        {NAV_BY_AREA[area].map(({ href, label, icon: Icon }) => {
           const active = isNavActive(href, pathname);
           return (
             <Link

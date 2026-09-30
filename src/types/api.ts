@@ -14,3 +14,10 @@ export interface SelectOption {
   label: string;
   value: string;
 }
+
+// A month's credit position; drives the credit meter (shared by the admin dashboard and the employee wallet).
+export interface CreditBalance {
+  readonly allowance: number;
+  readonly used: number;
+  readonly remaining: number;
+}

@@ -27,9 +27,14 @@ export function EmployeeTable({ employees, isSaving, onEdit, onToggle }: Props):
   const data = useMemo(
     () =>
       employees.map((e) => ({
-        name: <IdentityCell leading={<UserAvatar name={e.name} seed={e.code} />} title={e.name} subtitle={e.code} />,
+        name: <IdentityCell leading={<UserAvatar name={e.name} seed={e.code} />} title={e.name} subtitle={e.email ? `${e.code} · ${e.email}` : e.code} />,
         type: <StatusBadge tone={EMPLOYEE_TYPE_BADGE[e.type].tone}>{EMPLOYEE_TYPE_BADGE[e.type].label}</StatusBadge>,
-        status: <StatusBadge tone={e.active ? BadgeTone.SUCCESS : BadgeTone.MUTED}>{e.active ? "Active" : "Inactive"}</StatusBadge>,
+        status: (
+          <div className="flex flex-wrap gap-1.5">
+            <StatusBadge tone={e.active ? BadgeTone.SUCCESS : BadgeTone.MUTED}>{e.active ? "Active" : "Inactive"}</StatusBadge>
+            {!e.email && <StatusBadge tone={BadgeTone.WARNING}>Email missing</StatusBadge>}
+          </div>
+        ),
         actions: (
           <div className="flex flex-wrap gap-2 md:justify-end">
             <RowActionButton icon={Pencil} label="Edit" onClick={() => onEdit(e)} />

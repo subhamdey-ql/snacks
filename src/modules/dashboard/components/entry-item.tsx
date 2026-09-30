@@ -2,7 +2,7 @@ import { Undo2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { MonthEntry } from "@/modules/dashboard/types";
-import { formatIst } from "@/modules/dashboard/utils/form-utils";
+import { formatIst } from "@/lib/format-ist";
 
 interface Props {
   readonly entry: MonthEntry;

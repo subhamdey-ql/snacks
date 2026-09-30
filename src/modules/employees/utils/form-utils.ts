@@ -8,6 +8,7 @@ export const employeeSchema = z.object({
   name: z.string().trim().min(1, "Enter the name").max(100, "At most 100 characters"),
   // The select starts as "" (nothing chosen); the pipe narrows the string to EmployeeType on submit.
   type: z.string().min(1, "Choose a type").pipe(z.enum(EmployeeType)),
+  email: z.string().trim().min(1, "Enter the email").max(254, "At most 254 characters").pipe(z.email("Enter a valid email")),
 });
 export type EmployeeFormValues = z.input<typeof employeeSchema>;
 export type EmployeeFormType = z.output<typeof employeeSchema>;
@@ -15,6 +16,7 @@ export const employeeDefaults = (e?: Employee): EmployeeFormValues => ({
   code: e?.code ?? "",
   name: e?.name ?? "",
   type: e?.type ?? "",
+  email: e?.email ?? "",
 });
 export const employeeTypeOptions: SelectOption[] = [
   { label: "Work from office", value: EmployeeType.WFO },

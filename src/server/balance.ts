@@ -12,6 +12,11 @@ export function monthRange(d: Date): { start: Date; end: Date } {
   };
 }
 
+// "YYYY-MM-DD" of the IST calendar day containing `d`.
+export function dayLabel(d: Date): string {
+  return new Date(d.getTime() + IST_OFFSET_MS).toISOString().slice(0, 10);
+}
+
 // "YYYY-MM" of the IST month containing `d`.
 export function monthLabel(d: Date): string {
   return new Date(d.getTime() + IST_OFFSET_MS).toISOString().slice(0, 7);

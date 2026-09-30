@@ -1,4 +1,4 @@
-import { Prisma, type Employee } from "@prisma/client";
+import { Prisma, UserRole, type Employee } from "@prisma/client";
 import { db } from "@/server/db";
 import { DB_TYPE } from "@/server/db-enums";
 import { HttpError } from "@/server/http";
@@ -32,13 +32,18 @@ export function createEmployee(input: CreateEmployeeInput): Promise<Employee> {
   const type = DB_TYPE[input.type];
   return db.employee.upsert({
     where: { code: input.code },
-    update: { name: input.name, type, active: true },
-    create: { code: input.code, name: input.name, type },
+    update: { name: input.name, type, email: input.email, active: true },
+    create: { code: input.code, name: input.name, type, email: input.email },
   });
 }
 
 export async function updateEmployee(id: number, input: UpdateEmployeeInput): Promise<Employee> {
   const { type, ...rest } = input;
+  // An admin cannot be switched off through the app, so the last admin can never be locked out by a stray click.
+  if (input.active === false) {
+    const target = await db.employee.findUnique({ where: { id }, select: { role: true } });
+    if (target?.role === UserRole.ADMIN) throw new HttpError(422, "An admin cannot be deactivated here");
+  }
   const { count } = await db.employee.updateMany({ where: { id }, data: { ...rest, ...(type ? { type: DB_TYPE[type] } : {}) } });
   if (count === 0) throw new HttpError(404, "Employee not found");
   return db.employee.findUniqueOrThrow({ where: { id } });
@@ -47,16 +52,26 @@ export async function updateEmployee(id: number, input: UpdateEmployeeInput): Pr
 // Upserts good rows in chunks (one round-trip per chunk) and reports bad lines.
 export async function importEmployees(file: File): Promise<{ imported: number; errors: string[] }> {
   if (file.size > MAX_CSV_BYTES) throw new HttpError(400, "File is too large (max 1 MB)");
-  const { rows, errors } = parseEmployeeCsv(await file.text());
-  if (rows.length > MAX_CSV_ROWS) throw new HttpError(400, `Too many rows (max ${MAX_CSV_ROWS})`);
+  const parsed = parseEmployeeCsv(await file.text());
+  if (parsed.rows.length > MAX_CSV_ROWS) throw new HttpError(400, `Too many rows (max ${MAX_CSV_ROWS})`);
+  // An email already held by a DIFFERENT code would fail its whole chunk on the unique index; report those lines instead.
+  const taken = await db.employee.findMany({ where: { email: { in: parsed.rows.map((r) => r.email) } }, select: { code: true, email: true } });
+  const ownerOf = new Map(taken.map((t) => [t.email, t.code]));
+  const errors = [...parsed.errors];
+  const rows = parsed.rows.filter((r) => {
+    const owner = ownerOf.get(r.email);
+    if (owner === undefined || owner === r.code) return true;
+    errors.push(`Line ${r.line}: email already belongs to another employee`);
+    return false;
+  });
   for (let i = 0; i < rows.length; i += IMPORT_CHUNK) {
     await db.$transaction(
       rows.slice(i, i + IMPORT_CHUNK).map((r) =>
         db.employee.upsert({
           where: { code: r.code },
           // Same as POST /api/employees: an imported row re-activates an inactive employee.
-          update: { name: r.name, type: DB_TYPE[r.type], active: true },
-          create: { code: r.code, name: r.name, type: DB_TYPE[r.type] },
+          update: { name: r.name, type: DB_TYPE[r.type], email: r.email, active: true },
+          create: { code: r.code, name: r.name, type: DB_TYPE[r.type], email: r.email },
         }),
       ),
     );

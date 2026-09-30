@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { Check, Monitor, Moon, Palette as PaletteIcon, Sun, type LucideIcon } from "lucide-react";
+import type { ComponentProps } from "react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { usePalette } from "@/hooks/usePalette";
@@ -26,8 +27,8 @@ const MODES: readonly { readonly value: string; readonly label: string; readonly
 
 interface ThemeMenuProps {
   // Where the panel opens: the sidebar's footer opens upwards, the phone header downwards.
-  readonly side?: "top" | "bottom";
-  readonly align?: "start" | "end";
+  readonly side?: ComponentProps<typeof PopoverContent>["side"];
+  readonly align?: ComponentProps<typeof PopoverContent>["align"];
 }
 
 // Theme picker: choose a colour palette and a light/dark mode. Both are remembered in this browser.
@@ -57,15 +58,18 @@ export function ThemeMenu({ side = "bottom", align = "end" }: ThemeMenuProps): R
           {PALETTES.map((p) => {
             const active = palette === p.value;
             return (
-              <button
+              <Button
                 key={p.value}
                 type="button"
+                variant="ghost"
                 role="radio"
                 aria-checked={active}
                 onClick={() => setPalette(p.value)}
                 className={cn(
-                  "flex min-h-11 w-full items-center gap-3 rounded-xl px-2.5 text-left transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/40",
-                  active ? "bg-[var(--gos-primary-light)]" : "hover:bg-[var(--gos-surface-muted)]",
+                  "flex h-auto min-h-11 w-full items-center justify-start gap-3 rounded-xl border-0 px-2.5 text-left font-[weight:inherit] text-[length:inherit] leading-[inherit] whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/40 active:not-aria-[haspopup]:translate-y-0",
+                  active
+                    ? "bg-[var(--gos-primary-light)] hover:bg-[var(--gos-primary-light)] dark:hover:bg-[var(--gos-primary-light)]"
+                    : "hover:bg-[var(--gos-surface-muted)] dark:hover:bg-[var(--gos-surface-muted)]",
                 )}
               >
                 <span aria-hidden className={cn("size-6 shrink-0 rounded-full ring-2 ring-[var(--gos-surface)] ring-offset-1 ring-offset-[var(--gos-border)]", p.swatch)} />
@@ -74,7 +78,7 @@ export function ThemeMenu({ side = "bottom", align = "end" }: ThemeMenuProps): R
                   <span className="block text-xs text-[var(--gos-text-muted)]">{p.hint}</span>
                 </span>
                 {active && <Check className="size-4 shrink-0 text-[var(--gos-primary-text)]" aria-hidden />}
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -84,20 +88,23 @@ export function ThemeMenu({ side = "bottom", align = "end" }: ThemeMenuProps): R
             {MODES.map((m) => {
               const active = mounted && theme === m.value;
               return (
-                <button
+                <Button
                   key={m.value}
                   type="button"
+                  variant="ghost"
                   role="radio"
                   aria-checked={active}
                   onClick={() => setTheme(m.value)}
                   className={cn(
-                    "flex min-h-10 items-center justify-center gap-1.5 rounded-lg text-sm font-medium transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/40",
-                    active ? "bg-[var(--gos-surface)] text-[var(--gos-text)] shadow-[var(--gos-shadow)]" : "text-[var(--gos-text-muted)] hover:text-[var(--gos-text)]",
+                    "flex h-auto min-h-10 items-center justify-center gap-1.5 rounded-lg border-0 px-0 text-sm font-medium whitespace-normal transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/40 active:not-aria-[haspopup]:translate-y-0",
+                    active
+                      ? "bg-[var(--gos-surface)] text-[var(--gos-text)] shadow-[var(--gos-shadow)] hover:bg-[var(--gos-surface)] hover:text-[var(--gos-text)] dark:hover:bg-[var(--gos-surface)]"
+                      : "text-[var(--gos-text-muted)] hover:bg-transparent hover:text-[var(--gos-text)] dark:hover:bg-transparent",
                   )}
                 >
                   <m.icon className="size-4" aria-hidden />
                   {m.label}
-                </button>
+                </Button>
               );
             })}
           </div>

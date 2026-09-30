@@ -1,17 +1,25 @@
 import { useRouter } from "next/navigation";
 import { openErrorToast } from "@/components/common/toast";
+import { homeFor } from "@/lib/routes";
 import { useAuthAPI } from "@/modules/auth/hooks/useAuthAPI";
-import type { LoginDto } from "@/modules/auth/types";
+import type { RequestOtpDto, RequestOtpResult, VerifyOtpDto } from "@/modules/auth/types";
 
-export const useLogin = () => {
+export const useRequestOtp = () => {
+  const mutation = useAuthAPI().useRequestOtpMutation;
+  const requestCode = (dto: RequestOtpDto, onSent: (result: RequestOtpResult) => void): void =>
+    mutation.mutate(dto, { onSuccess: onSent, onError: (error) => openErrorToast({ error }) });
+  return { requestCode, isSending: mutation.isPending };
+};
+
+export const useVerifyOtp = () => {
   const router = useRouter();
-  const mutation = useAuthAPI().useLoginMutation;
-  const login = (dto: LoginDto): void =>
+  const mutation = useAuthAPI().useVerifyOtpMutation;
+  const verifyCode = (dto: VerifyOtpDto): void =>
     mutation.mutate(dto, {
-      onSuccess: () => router.replace("/"),
+      onSuccess: ({ role }) => router.replace(homeFor(role)),
       onError: (error) => openErrorToast({ error }),
     });
-  return { login, isPending: mutation.isPending };
+  return { verifyCode, isVerifying: mutation.isPending };
 };
 
 export const useLogout = () => {

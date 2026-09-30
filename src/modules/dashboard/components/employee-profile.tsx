@@ -1,7 +1,7 @@
 import { InlineNotice } from "@/components/common/inline-notice";
 import { StatusBadge } from "@/components/common/status-badge";
 import { UserAvatar } from "@/components/common/user-avatar";
-import { CreditMeter } from "@/modules/dashboard/components/credit-meter";
+import { CreditMeter } from "@/components/common/credit-meter";
 import type { EmployeeMonth } from "@/modules/dashboard/types";
 import { BadgeTone } from "@/types/enums";
 

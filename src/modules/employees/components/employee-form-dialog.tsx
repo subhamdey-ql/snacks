@@ -46,12 +46,13 @@ export function EmployeeFormDialog({ open, employee, onClose }: Props): React.JS
         <FormDialogHeader
           icon={employee ? UserPen : UserPlus}
           title={employee ? "Edit employee" : "Add employee"}
-          description={employee ? "Update their details. Past snack entries stay as they are." : "They can take snacks as soon as you save."}
+          description={employee ? "Update their details. Past snack entries stay as they are." : "They can take snacks as soon as you save, and log in with this email."}
         />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
             <FormInputWrapper form={form} fieldConfig={{ name: "code", fieldVariant: "input", label: "Code" }} />
             <FormInputWrapper form={form} fieldConfig={{ name: "name", fieldVariant: "input", label: "Name" }} />
+            <FormInputWrapper form={form} fieldConfig={{ name: "email", fieldVariant: "input", label: "Email", placeHolder: "name@company.com" }} />
             <FormInputWrapper
               form={form}
               fieldConfig={{ name: "type", fieldVariant: "selectField", label: "Type", options: employeeTypeOptions, placeHolder: "Type" }}

@@ -1,22 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
-import { CommonButton } from "@/components/common/common-button";
-import { Form } from "@/components/common/form/form";
-import { FormInputWrapper } from "@/components/common/form/form-input-wrapper";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
+import { useCountdown } from "@/hooks/useCountdown";
 import { LoginBrandPanel } from "@/modules/auth/components/login-brand-panel";
-import { useLogin } from "@/modules/auth/hooks/useAuthActions";
-import { loginDefaults, loginSchema, type LoginFormType } from "@/modules/auth/utils/form-utils";
+import { LoginCodeForm } from "@/modules/auth/components/login-code-form";
+import { LoginEmailForm } from "@/modules/auth/components/login-email-form";
+import { useRequestOtp, useVerifyOtp } from "@/modules/auth/hooks/useAuthActions";
+import { RESEND_SECONDS } from "@/modules/auth/utils/form-utils";
 
 // Split screen from lg (brand left, card right); on phones the card overlaps the bottom of the brand banner.
+// Two steps in one card: email first, then the code that was emailed (email === null means step 1).
 export function LoginTemplate(): React.JSX.Element {
-  const [showPassword, setShowPassword] = useState(false);
-  const { login, isPending } = useLogin();
-  const form = useForm<LoginFormType>({ resolver: zodResolver(loginSchema), defaultValues: loginDefaults() });
+  const [email, setEmail] = useState<string | null>(null);
+  // Local development only: the server sends the code back so it can be shown on screen (see the request route).
+  const [devCode, setDevCode] = useState<string | null>(null);
+  const { left, start } = useCountdown();
+  const { requestCode, isSending } = useRequestOtp();
+  const { verifyCode, isVerifying } = useVerifyOtp();
+
+  const sendTo = (address: string): void =>
+    requestCode({ email: address }, (result) => {
+      setEmail(address);
+      // A request inside the 60 s cooldown issues no new code, so keep showing the one already issued.
+      if (result.devCode) setDevCode(result.devCode);
+      start(RESEND_SECONDS);
+    });
 
   return (
     <div className="flex min-h-dvh flex-1 flex-col lg:grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
@@ -25,27 +34,26 @@ export function LoginTemplate(): React.JSX.Element {
         <Card className="animate-fade-in-up h-fit w-full max-w-sm gap-5 py-6 shadow-[var(--gos-shadow-lg)]">
           <CardHeader className="px-6">
             <h1 className="text-2xl font-bold tracking-tight text-[var(--gos-text)]">Welcome back</h1>
-            <CardDescription>Enter the admin password to open the tracker.</CardDescription>
+            <CardDescription>{email === null ? "Enter your work email and we'll send you a login code." : "Enter the code from your email."}</CardDescription>
           </CardHeader>
           <CardContent className="px-6">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(login)} className="flex flex-col gap-5">
-                <FormInputWrapper
-                  form={form}
-                  fieldConfig={{
-                    name: "password",
-                    fieldVariant: "passwordInput",
-                    label: "Password",
-                    showPassword,
-                    handlePasswordVisibility: () => setShowPassword((v) => !v),
-                  }}
-                />
-                <CommonButton type="submit" className="h-12 w-full gap-2 text-base md-fine:h-12" disabled={isPending}>
-                  {isPending && <Loader2 className="size-4 animate-spin" aria-hidden />}
-                  {isPending ? "Logging in…" : "Log in"}
-                </CommonButton>
-              </form>
-            </Form>
+            {email === null ? (
+              <LoginEmailForm isSending={isSending} onSubmit={sendTo} />
+            ) : (
+              <LoginCodeForm
+                email={email}
+                devCode={devCode}
+                isVerifying={isVerifying}
+                isResending={isSending}
+                resendIn={left}
+                onSubmit={(code) => verifyCode({ email, code })}
+                onResend={() => sendTo(email)}
+                onChangeEmail={() => {
+                  setEmail(null);
+                  setDevCode(null);
+                }}
+              />
+            )}
           </CardContent>
         </Card>
       </div>

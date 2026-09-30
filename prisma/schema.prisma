@@ -12,12 +12,21 @@ enum EmpType {
   WFO
 }
 
+// Which side of the app a person gets after login. Only changed directly in the database (never via the UI or a CSV).
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model Employee {
   id           Int           @id @default(autoincrement())
   code         String        @unique
   name         String
   type         EmpType
   active       Boolean       @default(true)
+  // Login identity. Required by the app; nullable in the database only so employees created before V2 survive the migration.
+  email        String?       @unique
+  role         UserRole      @default(USER)
   consumptions Consumption[]
 
   // Search/list filters on active and orders by name.
@@ -30,6 +39,7 @@ model Snack {
   credits      Int
   active       Boolean       @default(true)
   consumptions Consumption[]
+  menuDays     DailyMenu[]
 
   @@index([active, name])
 }
@@ -61,4 +71,35 @@ model Consumption {
   @@index([createdAt, voidedAt])
   // Employee month entries list (all rows, voided included).
   @@index([employeeId, createdAt])
+}
+
+// One-time login codes. Only a hash of the code is stored; a row is single use and expires after 10 minutes.
+model OtpCode {
+  id        Int       @id @default(autoincrement())
+  email     String
+  codeHash  String
+  expiresAt DateTime
+  attempts  Int       @default(0)
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([email, createdAt])
+}
+
+// Snacks the uncle marked available on a day. `date` is that IST day's start (as a UTC instant).
+model DailyMenu {
+  date    DateTime
+  snackId Int
+  snack   Snack    @relation(fields: [snackId], references: [id])
+
+  @@id([date, snackId])
+  @@index([date])
+}
+
+// Not used by any code yet (rate limiting is on hold); kept so the schema matches the table created by the
+// 20260930180000_rate_limit migration and Prisma does not try to drop it.
+model RateLimit {
+  key         String   @id
+  windowStart DateTime
+  count       Int
 }

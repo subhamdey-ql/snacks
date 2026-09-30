@@ -5,7 +5,7 @@ import { IdentityCell } from "@/components/common/identity-cell";
 import { RowActionButton } from "@/components/common/row-action-button";
 import { SnackTile } from "@/components/common/snack-tile";
 import { StatusBadge } from "@/components/common/status-badge";
-import { CreditsPill } from "@/modules/snacks/components/credits-pill";
+import { CreditsPill } from "@/components/common/credits-pill";
 import type { Snack } from "@/modules/snacks/types";
 import { BadgeTone } from "@/types/enums";
 

@@ -5,6 +5,8 @@ export interface Employee {
   code: string;
   name: string;
   type: EmployeeType;
+  // Null only for employees created before V2; they cannot log in until an email is added.
+  email: string | null;
   active: boolean;
 }
 
@@ -13,6 +15,7 @@ export interface SaveEmployeeDto {
   code: string;
   name: string;
   type: EmployeeType;
+  email?: string;
   active?: boolean;
 }
 

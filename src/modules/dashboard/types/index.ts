@@ -1,3 +1,4 @@
+import type { CreditBalance } from "@/types/api";
 import type { EmployeeType } from "@/types/enums";
 
 export interface EmployeeHit {
@@ -13,12 +14,6 @@ export interface SnackOption {
   credits: number;
 }
 
-export interface Balance {
-  allowance: number;
-  used: number;
-  remaining: number;
-}
-
 // Dates arrive as ISO strings over JSON.
 export interface MonthEntry {
   id: number;
@@ -31,7 +26,7 @@ export interface MonthEntry {
 
 export interface EmployeeMonth {
   employee: EmployeeHit & { active: boolean };
-  balance: Balance;
+  balance: CreditBalance;
   entries: MonthEntry[];
 }
 
