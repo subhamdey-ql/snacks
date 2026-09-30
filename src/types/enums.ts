@@ -4,6 +4,15 @@ export enum EmployeeType {
   HYBRID = "HYBRID",
 }
 
+// Brand accent colour for decorative fills (avatars, stat-card icons). Mapped to token classes in accent-classes.ts.
+export enum AccentTone {
+  BLUE = "blue",
+  YELLOW = "yellow",
+  GREEN = "green",
+  ORANGE = "orange",
+  RED = "red",
+}
+
 // Colour tone of a StatusBadge (soft tinted background + matching text).
 export enum BadgeTone {
   SUCCESS = "success",

@@ -10,25 +10,28 @@ interface Props {
   readonly disabled: boolean;
 }
 
-// Snack picker, qty and submit; stacks on mobile, one row from sm up.
+// Snack and qty side by side from sm, stacked on mobile; a full-width Record button below.
 export function RecordFields({ form, snacks, disabled }: Props): React.JSX.Element {
   return (
-    <div className="flex flex-col gap-2 sm:flex-row sm:items-start">
-      <div className="sm:flex-1">
-        <FormInputWrapper
-          form={form}
-          fieldConfig={{
-            name: "snackId",
-            fieldVariant: "selectField",
-            placeHolder: "Pick a snack",
-            options: snacks.map((s) => ({ label: `${s.name} (${s.credits})`, value: String(s.id) })),
-          }}
-        />
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+        <div className="min-w-0 sm:flex-1">
+          <FormInputWrapper
+            form={form}
+            fieldConfig={{
+              name: "snackId",
+              label: "Snack",
+              fieldVariant: "selectField",
+              placeHolder: "Pick a snack",
+              options: snacks.map((s) => ({ label: `${s.name} (${s.credits})`, value: String(s.id) })),
+            }}
+          />
+        </div>
+        <div className="sm:w-28">
+          <FormInputWrapper form={form} fieldConfig={{ name: "qty", label: "Quantity", fieldVariant: "numberInput", placeHolder: "Qty" }} />
+        </div>
       </div>
-      <div className="sm:w-24">
-        <FormInputWrapper form={form} fieldConfig={{ name: "qty", fieldVariant: "numberInput", placeHolder: "Qty" }} />
-      </div>
-      <CommonButton type="submit" disabled={disabled} className="h-10 sm:w-32">
+      <CommonButton type="submit" disabled={disabled} className="h-12 w-full text-base sm:h-12">
         Record
       </CommonButton>
     </div>

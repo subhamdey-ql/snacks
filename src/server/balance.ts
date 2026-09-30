@@ -24,3 +24,15 @@ export function monthFromParam(m: string | null, now = new Date()): Date {
   // Mid-month noon UTC is far from any IST month boundary.
   return new Date(Date.UTC(Number(hit[1]), Number(hit[2]) - 1, 15, 12));
 }
+
+// [start, end) of the IST calendar day containing `d`.
+export function dayRange(d: Date): { start: Date; end: Date } {
+  const ist = new Date(d.getTime() + IST_OFFSET_MS);
+  const y = ist.getUTCFullYear();
+  const m = ist.getUTCMonth();
+  const day = ist.getUTCDate();
+  return {
+    start: new Date(Date.UTC(y, m, day) - IST_OFFSET_MS),
+    end: new Date(Date.UTC(y, m, day + 1) - IST_OFFSET_MS),
+  };
+}

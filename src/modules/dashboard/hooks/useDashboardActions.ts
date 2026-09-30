@@ -9,8 +9,12 @@ export const useDashboardActions = () => {
   const recordMutation = useRecordMutation;
   const voidMutation = useVoidMutation;
 
-  // Only this employee's month changes, so only that key is invalidated.
-  const refresh = (employeeId: number): Promise<void> => queryClient.invalidateQueries({ queryKey: ["employee-month", employeeId] });
+  // This employee's month and the home tiles are the only datasets a record/void changes.
+  const refresh = (employeeId: number): Promise<unknown> =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: ["employee-month", employeeId] }),
+      queryClient.invalidateQueries({ queryKey: ["dashboard-summary"] }),
+    ]);
 
   const record = (dto: RecordDto, onDone?: () => void): void =>
     recordMutation.mutate(dto, {

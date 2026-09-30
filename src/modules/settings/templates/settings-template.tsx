@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CommonButton } from "@/components/common/common-button";
 import { CommonLoader } from "@/components/common/common-loader";
 import { Form } from "@/components/common/form/form";
+import { InlineNotice } from "@/components/common/inline-notice";
 import { FormInputWrapper } from "@/components/common/form/form-input-wrapper";
 import { useAllowanceActions } from "@/modules/settings/hooks/useAllowanceActions";
 import { useAllowanceAPI } from "@/modules/settings/hooks/useAllowanceAPI";
@@ -13,7 +14,7 @@ import {
   allowanceSchema,
   type AllowanceFormValues,
 } from "@/modules/settings/utils/form-utils";
-import { EmployeeType } from "@/types/enums";
+import { BadgeTone, EmployeeType } from "@/types/enums";
 
 export function SettingsTemplate(): React.JSX.Element {
   const { data, isLoading, isError, refetch } = useAllowanceAPI().useGetAllowanceQuery();
@@ -30,7 +31,7 @@ export function SettingsTemplate(): React.JSX.Element {
   if (isError || !data) {
     return (
       <div className="flex max-w-md flex-col items-start gap-3">
-        <p className="text-sm text-destructive">Could not load the monthly credits.</p>
+        <InlineNotice tone={BadgeTone.DANGER}>Could not load the monthly credits.</InlineNotice>
         <CommonButton type="button" onClick={() => refetch()}>
           Retry
         </CommonButton>

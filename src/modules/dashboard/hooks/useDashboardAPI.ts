@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiFetch } from "@/lib/api";
-import type { EmployeeHit, EmployeeMonth, RecordDto, SnackOption } from "@/modules/dashboard/types";
+import type { DashboardSummary, EmployeeHit, EmployeeMonth, RecordDto, SnackOption } from "@/modules/dashboard/types";
 import type { Paginated } from "@/types/api";
 
 export const useDashboardAPI = () => {
@@ -18,7 +18,9 @@ export const useDashboardAPI = () => {
       enabled: id !== null,
       queryFn: () => apiFetch.get<EmployeeMonth>(`/employees/${id}/month`),
     });
+  const useSummaryQuery = () =>
+    useQuery({ queryKey: ["dashboard-summary"], queryFn: () => apiFetch.get<DashboardSummary>("/dashboard/summary") });
   const useRecordMutation = useMutation({ mutationFn: (dto: RecordDto) => apiFetch.post<{ ok: true }>("/consumptions", dto) });
   const useVoidMutation = useMutation({ mutationFn: (id: number) => apiFetch.post<{ ok: true }>(`/consumptions/${id}/void`) });
-  return { useSearchEmployeesQuery, useActiveSnacksQuery, useEmployeeMonthQuery, useRecordMutation, useVoidMutation };
+  return { useSummaryQuery, useSearchEmployeesQuery, useActiveSnacksQuery, useEmployeeMonthQuery, useRecordMutation, useVoidMutation };
 };

@@ -61,6 +61,8 @@
   --gos-blue-text: #094ed2;
   --gos-yellow: #ffc938;
   --gos-yellow-light: #fffaeb;
+  /* Ink for content sitting ON the yellow (brand tile); stays dark in both themes. */
+  --gos-on-yellow: #4a3300;
   --gos-orange: #f79009;
   --gos-orange-light: #fef4e6;
   --gos-green: #12b76a;

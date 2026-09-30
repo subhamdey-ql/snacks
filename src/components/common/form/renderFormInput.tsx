@@ -85,7 +85,7 @@ export function RenderFormInput<TData extends FieldValues>({ field, sectionField
 						type="button"
 						aria-label={sectionField.showPassword ? "Hide password" : "Show password"}
 						onClick={sectionField.handlePasswordVisibility}
-						className="absolute right-2 flex h-10 w-10 items-center sm:h-7 sm:w-7 justify-center rounded text-gray-400 hover:bg-transparent hover:text-gray-600"
+						className="absolute right-2 flex h-10 w-10 items-center sm:h-7 sm:w-7 justify-center rounded-lg text-muted-foreground hover:bg-transparent hover:text-foreground"
 					>
 						{sectionField.showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 					</button>

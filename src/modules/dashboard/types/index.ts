@@ -40,3 +40,11 @@ export interface RecordDto {
   snackId: number;
   qty: number;
 }
+
+export interface DashboardSummary {
+  todayEntries: number;
+  monthCredits: number;
+  monthEmployees: number;
+}
+
+export { CreditLevel } from "@/modules/dashboard/types/enums";

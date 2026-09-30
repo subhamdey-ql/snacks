@@ -48,7 +48,7 @@ export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(
 						type="button"
 						aria-label={placeholder}
 						style={width ? { width } : undefined}
-						className={cn("flex h-10 w-full min-w-0 items-center rounded-[10px] border bg-background px-3 text-left", className)}
+						className={cn("flex h-11 w-full min-w-0 items-center rounded-xl border border-input bg-[var(--gos-surface)] px-3.5 text-left transition-[color,box-shadow,border-color] duration-150 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/20 data-[state=open]:border-ring", className)}
 					>
 						<div className="flex w-full min-w-0 items-center justify-between gap-2">
 							<div className="flex min-w-0 gap-2">

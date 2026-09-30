@@ -1,4 +1,5 @@
 import { useWatch, type Control } from "react-hook-form";
+import { cn } from "@/lib/utils";
 import type { SnackOption } from "@/modules/dashboard/types";
 import type { RecordType, RecordValues } from "@/modules/dashboard/utils/form-utils";
 
@@ -15,9 +16,15 @@ export function CostPreview({ control, snacks, remaining }: Props): React.JSX.El
   const count = Number(qty);
   if (!snack || !Number.isInteger(count) || count < 1) return null;
   const cost = snack.credits * count;
+  const over = cost > remaining;
   return (
-    <p className={cost > remaining ? "text-sm text-[var(--gos-red)]" : "text-sm text-muted-foreground"}>
-      Costs {cost} credits, {remaining - cost} left after
+    <p
+      className={cn(
+        "self-start rounded-full px-3.5 py-1.5 text-sm font-medium tabular-nums",
+        over ? "bg-[var(--gos-red-light)] text-[var(--gos-red)]" : "bg-[var(--gos-yellow-light)] text-[var(--gos-text)]",
+      )}
+    >
+      Costs {cost} credits · {remaining - cost} left after
     </p>
   );
 }
