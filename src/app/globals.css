@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Growth OS design-system tokens. Components reference these (never raw hex); the shadcn
+ * variables further down are mapped onto them so every shadcn primitive re-themes with them.
+ */
+:root {
+  --gos-blue: #094ed2;
+  --gos-blue-dark: #073b9e;
+  --gos-blue-darker: #031b4a;
+  --gos-blue-light: #e6edfb;
+  /* Blue used as TEXT (active nav, links). Same as --gos-blue in light; lifted in dark for contrast. */
+  --gos-blue-text: #094ed2;
+  --gos-yellow: #ffc938;
+  --gos-yellow-light: #fffaeb;
+  --gos-orange: #f79009;
+  --gos-orange-light: #fef4e6;
+  --gos-green: #12b76a;
+  --gos-green-light: #e7f8f0;
+  --gos-red: #dc2626;
+  --gos-red-light: #feeceb;
+  --gos-neutral: #a2a8bd;
+  --gos-neutral-light: #f6f6f8;
+  --gos-neutral-darker: #393b42;
+  --gos-page-bg: #f0f2f7;
+
+  --gos-surface: #ffffff;
+  --gos-surface-muted: #f6f6f8;
+  --gos-border: #e4e7ef;
+  --gos-text: #1d2433;
+  --gos-text-muted: #636b80;
+  --gos-hero-from: #094ed2;
+  --gos-hero-to: #2f7bf5;
+  /* Very faint blue wash in the page's top-left corner. */
+  --gos-page-wash: rgba(9, 78, 210, 0.07);
+
+  --gos-r-card: 12px;
+  --gos-r-btn: 8px;
+  --gos-r-pill: 20px;
+  --gos-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --gos-shadow-lg: 0 2px 4px rgba(16, 24, 40, 0.06), 0 16px 40px rgba(16, 24, 40, 0.12);
+  --gos-shadow-btn: 0 1px 2px rgba(9, 78, 210, 0.25), 0 4px 12px rgba(9, 78, 210, 0.18);
+
+  --radius: 0.625rem;
+}
+
+.dark {
+  --gos-blue: #2f6be6;
+  --gos-blue-dark: #2458c4;
+  --gos-blue-darker: #c9d8fb;
+  --gos-blue-light: rgba(47, 107, 230, 0.18);
+  --gos-blue-text: #85abf7;
+  --gos-yellow: #ffc938;
+  --gos-yellow-light: rgba(255, 201, 56, 0.12);
+  --gos-orange: #fdb022;
+  --gos-orange-light: rgba(247, 144, 9, 0.15);
+  --gos-green: #32d583;
+  --gos-green-light: rgba(50, 213, 131, 0.14);
+  --gos-red: #f97066;
+  --gos-red-light: rgba(249, 112, 102, 0.14);
+  --gos-neutral: #6b7390;
+  --gos-neutral-light: #1b2238;
+  /* Used as body text in light mode, so it flips to the light text colour here. */
+  --gos-neutral-darker: #e8ebf5;
+  --gos-page-bg: #0d1220;
+
+  --gos-surface: #151b2d;
+  --gos-surface-muted: #1b2238;
+  --gos-border: #26304a;
+  --gos-text: #e8ebf5;
+  --gos-text-muted: #9aa3bd;
+  --gos-hero-from: #0b3aa6;
+  --gos-hero-to: #1f5fd6;
+  --gos-page-wash: rgba(47, 107, 230, 0.12);
+
+  --gos-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.28);
+  --gos-shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 16px 40px rgba(0, 0, 0, 0.45);
+  --gos-shadow-btn: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(47, 107, 230, 0.25);
+}
+
+/* shadcn variables, defined once in terms of the tokens above so they follow light/dark. */
+:root,
+.dark {
+  --background: var(--gos-surface);
+  --foreground: var(--gos-text);
+  --card: var(--gos-surface);
+  --card-foreground: var(--gos-text);
+  --popover: var(--gos-surface);
+  --popover-foreground: var(--gos-text);
+  --primary: var(--gos-blue);
+  --primary-foreground: #ffffff;
+  --secondary: var(--gos-surface-muted);
+  --secondary-foreground: var(--gos-text);
+  --muted: var(--gos-surface-muted);
+  --muted-foreground: var(--gos-text-muted);
+  --accent: var(--gos-blue-light);
+  --accent-foreground: var(--gos-blue-text);
+  --destructive: var(--gos-red);
+  --border: var(--gos-border);
+  --input: var(--gos-border);
+  --ring: var(--gos-blue);
+  --chart-1: var(--gos-blue);
+  --chart-2: var(--gos-yellow);
+  --chart-3: var(--gos-green);
+  --chart-4: var(--gos-orange);
+  --chart-5: var(--gos-neutral);
+  --sidebar: var(--gos-surface);
+  --sidebar-foreground: var(--gos-text);
+  --sidebar-primary: var(--gos-blue);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--gos-blue-light);
+  --sidebar-accent-foreground: var(--gos-blue-text);
+  --sidebar-border: var(--gos-border);
+  --sidebar-ring: var(--gos-blue);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    color: var(--gos-text);
+    background-color: var(--gos-page-bg);
+    background-image: radial-gradient(60rem 40rem at 0% 0%, var(--gos-page-wash), transparent 70%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+
+/* Entrance motion: a short fade-and-rise. `.stagger` cascades it over up to 8 children. */
+@keyframes gos-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-in-up {
+  animation: gos-fade-in-up 200ms ease-out both;
+}
+
+@utility stagger {
+  & > * {
+    animation: gos-fade-in-up 200ms ease-out both;
+  }
+  & > *:nth-child(2) { animation-delay: 40ms; }
+  & > *:nth-child(3) { animation-delay: 80ms; }
+  & > *:nth-child(4) { animation-delay: 120ms; }
+  & > *:nth-child(5) { animation-delay: 160ms; }
+  & > *:nth-child(6) { animation-delay: 200ms; }
+  & > *:nth-child(7) { animation-delay: 240ms; }
+  & > *:nth-child(n + 8) { animation-delay: 280ms; }
+}
+
+/* Respect the OS setting: kill every animation/transition, including shadcn's animate-in ones. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

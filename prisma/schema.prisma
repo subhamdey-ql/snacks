@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EmpType {
+  HYBRID
+  WFO
+}
+
+model Employee {
+  id           Int           @id @default(autoincrement())
+  code         String        @unique
+  name         String
+  type         EmpType
+  active       Boolean       @default(true)
+  consumptions Consumption[]
+
+  // Search/list filters on active and orders by name.
+  @@index([active, name])
+}
+
+model Snack {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  credits      Int
+  active       Boolean       @default(true)
+  consumptions Consumption[]
+
+  @@index([active, name])
+}
+
+// Append-only history: the row with the latest effectiveFrom <= a month's start applies to that month.
+model Allowance {
+  id            Int      @id @default(autoincrement())
+  type          EmpType
+  credits       Int
+  effectiveFrom DateTime
+
+  @@unique([type, effectiveFrom])
+}
+
+model Consumption {
+  id             Int       @id @default(autoincrement())
+  employeeId     Int
+  snackId        Int
+  qty            Int
+  creditsCharged Int
+  createdAt      DateTime  @default(now())
+  voidedAt       DateTime?
+  employee       Employee  @relation(fields: [employeeId], references: [id])
+  snack          Snack     @relation(fields: [snackId], references: [id])
+
+  // Balance: one employee, not voided, within a month.
+  @@index([employeeId, voidedAt, createdAt])
+  // Reports: all employees, not voided, within a month.
+  @@index([createdAt, voidedAt])
+  // Employee month entries list (all rows, voided included).
+  @@index([employeeId, createdAt])
+}
