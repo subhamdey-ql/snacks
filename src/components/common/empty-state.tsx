@@ -23,7 +23,7 @@ export function EmptyState({ title, icon: Icon, hint }: EmptyStateProps): React.
           </EmptyMedia>
         )}
         <EmptyTitle className="font-sans text-sm font-medium tracking-normal text-[var(--gos-text)]">{title}</EmptyTitle>
-        {hint && <EmptyDescription className="text-sm/normal text-[var(--gos-text-muted)]">{hint}</EmptyDescription>}
+        {hint && <EmptyDescription className="text-sm leading-5 text-[var(--gos-text-muted)]">{hint}</EmptyDescription>}
       </EmptyHeader>
     </Empty>
   );

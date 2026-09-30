@@ -25,7 +25,7 @@ export function Pagination({ page, totalPages, onPageChange }: Props): React.JSX
             Previous
           </Button>
         </PaginationItem>
-        <PaginationItem>
+        <PaginationItem className="text-sm">
           <span className="text-sm text-[var(--gos-text-muted)] tabular-nums">
             Page <span className="font-semibold text-[var(--gos-text)]">{page}</span> of {totalPages}
           </span>

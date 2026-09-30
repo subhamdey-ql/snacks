@@ -8,7 +8,9 @@
     "start": "next start -p 3010",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "seed": "tsx prisma/seed.ts",
+    "seed:reset": "tsx prisma/seed.ts --reset"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

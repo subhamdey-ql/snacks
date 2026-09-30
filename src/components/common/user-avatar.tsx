@@ -19,8 +19,8 @@ export function UserAvatar({ name, seed, className }: UserAvatarProps): React.JS
   const tone = TONES[hash % TONES.length] ?? AccentTone.BLUE;
   return (
     // Avatar's inner ring (after:) is switched off and the fallback takes the accent colours, so the look is unchanged.
-    <Avatar aria-hidden className={cn("size-10 after:hidden", className)}>
-      <AvatarFallback className={cn("text-sm font-bold", ACCENT_CLASSES[tone])}>{initials(name)}</AvatarFallback>
+    <Avatar aria-hidden className={cn("size-10 text-sm after:hidden", className)}>
+      <AvatarFallback className={cn("text-[length:inherit] font-bold", ACCENT_CLASSES[tone])}>{initials(name)}</AvatarFallback>
     </Avatar>
   );
 }

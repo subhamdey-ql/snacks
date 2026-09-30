@@ -34,6 +34,10 @@ There is no seed data. Log in, then:
 
 Then use the dashboard to record snacks.
 
+### Demo data (optional)
+
+`pnpm seed` adds ~40 fictional employees (codes `DEMO-001`…), 16 snacks and ~3 months of realistic entries. It never overwrites allowances you have set, and it skips if demo data is already there. `pnpm seed:reset` removes only the demo employees, their entries and the demo snacks nothing else uses; allowances and any real data are left alone. Both use whatever `DATABASE_URL` points at.
+
 ## Deploy (Vercel + Neon or Supabase)
 
 1. Create a Postgres database on Neon (or Supabase) and copy its connection string.

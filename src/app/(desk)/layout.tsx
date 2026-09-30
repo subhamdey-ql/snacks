@@ -13,7 +13,7 @@ export default async function DeskLayout({ children }: { children: React.ReactNo
       <AppSidebar footer={<LogoutButton />} />
       <MobileHeader actions={<LogoutButton iconOnly />} />
       <main className="flex min-w-0 flex-1 flex-col md:pl-64">
-        <div className="mx-auto w-full max-w-5xl min-w-0 pt-6 pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(7rem+env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] md:py-8 md:pr-[max(2rem,env(safe-area-inset-right))] md:pl-8">{children}</div>
+        <div className="w-full min-w-0 pt-6 pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(7rem+env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] md:py-8 md:pr-[max(2rem,env(safe-area-inset-right))] md:pl-8">{children}</div>
       </main>
       <MobileBottomNav />
     </div>
