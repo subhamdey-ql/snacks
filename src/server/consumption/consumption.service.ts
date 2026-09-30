@@ -38,7 +38,7 @@ export function recordConsumption(input: RecordInput, now = new Date()): Promise
     if (!snack || !snack.active) throw new HttpError(404, "Snack not found or inactive");
     const cost = snack.credits * input.qty;
     const { remaining } = await getBalance(tx, { id: emp.id, type: APP_TYPE[emp.type] }, now);
-    if (cost > remaining) throw new HttpError(422, `Not enough credits: needs ${cost}, has ${remaining}`);
+    if (cost > remaining) throw new HttpError(422, `Not enough credits: needs ${cost}, has ${remaining}. They can buy it directly from the pantry.`);
     await tx.consumption.create({
       data: { employeeId: emp.id, snackId: snack.id, qty: input.qty, creditsCharged: cost, createdAt: now },
     });
