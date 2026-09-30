@@ -28,7 +28,8 @@ export function EmployeeReportTable({ rows }: { readonly rows: readonly Employee
   );
   return (
     <DataEmptyHandler data={rows} icon={UserX} emptyMessage="No employees." hint="Add employees to see their monthly usage here.">
-      <ScrollableList>
+      {/* Internal scroll only on md+; on phones the stacked rows just flow with the page. */}
+      <ScrollableList className="max-md:max-h-none max-md:overflow-visible">
         <CommonTable columns={columns} data={data} stackOnMobile />
       </ScrollableList>
     </DataEmptyHandler>

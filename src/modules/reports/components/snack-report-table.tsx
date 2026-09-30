@@ -29,7 +29,8 @@ export function SnackReportTable({ rows }: { readonly rows: readonly SnackReport
   }, [rows]);
   return (
     <DataEmptyHandler data={rows} icon={CalendarX2} emptyMessage="No snacks recorded this month." hint="Entries from the Home screen show up here.">
-      <ScrollableList>
+      {/* Internal scroll only on md+; on phones the stacked rows just flow with the page. */}
+      <ScrollableList className="max-md:max-h-none max-md:overflow-visible">
         <CommonTable columns={columns} data={data} />
       </ScrollableList>
     </DataEmptyHandler>
