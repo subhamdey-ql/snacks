@@ -1,10 +1,12 @@
 import { Cookie } from "lucide-react";
+import { FoodPattern } from "@/components/common/food-pattern";
 
 // Brand side of the login screen: hero gradient, the tilted yellow cookie tile, tagline and soft shapes.
 // Compact banner on phones (the login card overlaps its bottom edge); full-height left panel from lg.
 export function LoginBrandPanel(): React.JSX.Element {
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(135deg,var(--gos-hero-from),var(--gos-hero-to))] pt-[calc(2.5rem+env(safe-area-inset-top))] pr-[max(1.5rem,env(safe-area-inset-right))] pb-20 pl-[max(1.5rem,env(safe-area-inset-left))] text-white lg:flex lg:flex-col lg:justify-center lg:px-14 lg:py-16">
+      <FoodPattern />
       {/* Decorative only: a warm glow, a faint ring and two floating "crumbs". */}
       <div aria-hidden className="pointer-events-none absolute -top-24 -right-16 size-72 rounded-full bg-white opacity-15 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-32 -left-24 size-96 rounded-full border-[40px] border-white/10" />

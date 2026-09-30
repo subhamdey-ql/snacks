@@ -48,7 +48,7 @@ A simple web app where the uncle looks up an employee, records the snacks they t
 ### 4.4a Home dashboard
 - Search hero plus three summary tiles: snacks recorded today, credits used this month, employees served this month (voided entries excluded; IST day and month).
 - A selected employee shows a credit meter (green above 50% left, amber 20-50%, red below 20%), the record form and this month's entries with Undo.
-- The app has a light and a dark theme, a sidebar on desktop and a bottom tab bar on phones.
+- Each user can pick a colour theme (Food, Blue or Plain) and light/dark/auto from a menu; the choice is remembered in their browser. The app has a sidebar on desktop and a bottom tab bar on phones.
 
 ### 4.5 Undo
 - Uncle can void a wrong entry (current month only). The credits are restored to that month's balance.

@@ -1,3 +1,5 @@
+import { PaletteInitScript } from "@/components/common/palette-init-script";
+import { FoodBackdrop } from "@/components/common/food-backdrop";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -26,7 +28,11 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <PaletteInitScript />
+      </head>
       <body className={cn(inter.className, "min-h-full flex flex-col")}>
+        <FoodBackdrop />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

@@ -7,7 +7,7 @@ import { AccentTone } from "@/types/enums";
 export function ReportStatCards({ stats }: { readonly stats: ReportStats | null }): React.JSX.Element {
   return (
     <section aria-label="Month totals" className="stagger grid grid-cols-3 gap-2 sm:gap-4">
-      <StatCard icon={Coins} label="Credits used" value={stats && stats.creditsUsed} tone={AccentTone.BLUE} />
+      <StatCard icon={Coins} label="Credits used" value={stats && stats.creditsUsed} tone={AccentTone.PRIMARY} />
       <StatCard icon={Cookie} label="Snacks recorded" value={stats && stats.snacksRecorded} tone={AccentTone.YELLOW} />
       <StatCard icon={Users} label="Employees with usage" value={stats && stats.employeesWithUsage} tone={AccentTone.GREEN} />
     </section>

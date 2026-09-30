@@ -13,7 +13,7 @@ export function SummaryTiles(): React.JSX.Element {
     <section aria-label="This month so far" className="flex flex-col gap-2">
       <div className="stagger grid grid-cols-3 gap-2 sm:gap-4">
         <StatCard icon={Cookie} label="Snacks today" value={pick(data?.todayEntries)} tone={AccentTone.YELLOW} />
-        <StatCard icon={Coins} label="Credits used this month" value={pick(data?.monthCredits)} tone={AccentTone.BLUE} />
+        <StatCard icon={Coins} label="Credits used this month" value={pick(data?.monthCredits)} tone={AccentTone.PRIMARY} />
         <StatCard icon={Users} label="Employees served this month" value={pick(data?.monthEmployees)} tone={AccentTone.GREEN} />
       </div>
       {isError && <p className="text-sm text-[var(--gos-text-muted)]">Could not load today&apos;s numbers. Refresh to try again.</p>}

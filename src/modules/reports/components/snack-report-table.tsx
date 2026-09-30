@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-import { CalendarX2 } from "lucide-react";
+import { Popcorn } from "lucide-react";
 import { CommonTable, type CommonTableColumn } from "@/components/common/common-table";
 import { DataEmptyHandler } from "@/components/common/data-empty-handler";
+import { IdentityCell } from "@/components/common/identity-cell";
 import { ScrollableList } from "@/components/common/scrollable-list";
+import { SnackTile } from "@/components/common/snack-tile";
 import { Progress } from "@/components/ui/progress";
 import type { SnackReportRow } from "@/modules/reports/types";
 
@@ -17,7 +19,7 @@ export function SnackReportTable({ rows }: { readonly rows: readonly SnackReport
   const data = useMemo(() => {
     const max = Math.max(1, ...rows.map((r) => r.qty));
     return rows.map((r) => ({
-      name: <span className="block min-w-32 max-w-[10rem] font-medium whitespace-normal [overflow-wrap:anywhere] sm:max-w-xs">{r.name}</span>,
+      name: <IdentityCell leading={<SnackTile name={r.name} />} title={r.name} />,
       qty: (
         <div className="flex items-center justify-end gap-2.5">
           <Progress aria-hidden value={(r.qty / max) * 100} className="hidden w-20 sm:flex" indicatorClassName="bg-[var(--gos-yellow)]" />
@@ -28,7 +30,7 @@ export function SnackReportTable({ rows }: { readonly rows: readonly SnackReport
     }));
   }, [rows]);
   return (
-    <DataEmptyHandler data={rows} icon={CalendarX2} emptyMessage="No snacks recorded this month." hint="Entries from the Home screen show up here.">
+    <DataEmptyHandler data={rows} icon={Popcorn} emptyMessage="No snacks munched this month yet." hint="Entries from the Home screen show up here.">
       {/* Internal scroll only on md+; on phones the stacked rows just flow with the page. */}
       <ScrollableList className="max-md:max-h-none max-md:overflow-visible">
         <CommonTable columns={columns} data={data} stackOnMobile />

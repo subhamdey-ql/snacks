@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/common/brand-mark";
 import { NAV_ITEMS, isNavActive } from "@/components/common/nav-items";
-import { ThemeToggle } from "@/components/common/theme-toggle";
+import { ThemeMenu } from "@/components/common/theme-menu";
 import { cn } from "@/lib/utils";
 
 // `footer` = the logout control, composed by the layout so this shared component imports no module.
@@ -26,7 +26,7 @@ export function AppSidebar({ footer }: { readonly footer?: React.ReactNode }): R
               className={cn(
                 "relative flex h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium transition-colors duration-150 outline-none focus-visible:ring-3 focus-visible:ring-ring/35",
                 active
-                  ? "bg-[var(--gos-blue-light)] text-[var(--gos-blue-text)] before:absolute before:inset-y-2.5 before:left-0 before:w-1 before:rounded-full before:bg-[var(--gos-blue)]"
+                  ? "bg-[var(--gos-primary-light)] text-[var(--gos-primary-text)] before:absolute before:inset-y-2.5 before:left-0 before:w-1 before:rounded-full before:bg-[var(--gos-primary)]"
                   : "text-[var(--gos-text-muted)] hover:bg-[var(--gos-surface-muted)] hover:text-[var(--gos-text)]",
               )}
             >
@@ -38,7 +38,7 @@ export function AppSidebar({ footer }: { readonly footer?: React.ReactNode }): R
       </nav>
       <div className="flex items-center justify-between gap-2 border-t border-[var(--gos-border)] pt-4">
         {footer}
-        <ThemeToggle />
+        <ThemeMenu side="top" align="end" />
       </div>
     </aside>
   );

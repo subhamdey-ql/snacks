@@ -65,7 +65,7 @@ const CONTENT_CLASS =
 
 // Row look: 44px touch rows (36px with a fine pointer); the selected row is tinted blue instead of showing a check.
 const ITEM_CLASS =
-  "min-h-11 md-fine:min-h-9 rounded-lg px-3 py-1.5 text-sm font-normal transition-colors focus:bg-muted hover:bg-muted data-selected:bg-[var(--gos-blue-light)] data-selected:font-medium data-selected:text-[var(--gos-blue-text)] data-selected:hover:bg-[var(--gos-blue-light)]";
+  "min-h-11 md-fine:min-h-9 rounded-lg px-3 py-1.5 text-sm font-normal transition-colors focus:bg-muted hover:bg-muted data-selected:bg-[var(--gos-primary-light)] data-selected:font-medium data-selected:text-[var(--gos-primary-text)] data-selected:hover:bg-[var(--gos-primary-light)]";
 
 export const SelectField = forwardRef<HTMLButtonElement, SelectFieldProps>(
   (

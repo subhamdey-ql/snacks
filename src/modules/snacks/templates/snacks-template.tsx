@@ -48,7 +48,7 @@ export function SnacksTemplate(): React.JSX.Element {
           <DataEmptyHandler
             data={data}
             icon={Cookie}
-            emptyMessage={includeInactive ? "No snacks yet." : "No active snacks."}
+            emptyMessage={includeInactive ? "The counter is empty." : "No active snacks."}
             hint={includeInactive ? "Add your first snack to start recording." : "Add a snack, or show inactive ones to bring one back."}
           >
             <SnackTable

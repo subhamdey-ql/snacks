@@ -1,6 +1,6 @@
 "use client";
 
-import { CalendarX2 } from "lucide-react";
+import { Popcorn } from "lucide-react";
 import { DataEmptyHandler } from "@/components/common/data-empty-handler";
 import { ScrollableList } from "@/components/common/scrollable-list";
 import { EntryItem } from "@/modules/dashboard/components/entry-item";
@@ -16,7 +16,7 @@ interface Props {
 export function MonthEntries({ employeeId, entries }: Props): React.JSX.Element {
   const { voidEntry, isVoiding } = useDashboardActions();
   return (
-    <DataEmptyHandler data={entries} emptyMessage="Nothing recorded this month." icon={CalendarX2}>
+    <DataEmptyHandler data={entries} emptyMessage="Nothing munched this month yet." hint="Pick a snack above and it shows up here." icon={Popcorn}>
       <ScrollableList>
         <ul className="relative before:absolute before:inset-y-3 before:left-[10px] before:w-0.5 before:rounded-full before:bg-[var(--gos-border)]">
           {entries.map((e) => (

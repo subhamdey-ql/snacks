@@ -19,7 +19,7 @@ export function AllowanceCard({ form, type, icon: Icon, title, subtitle, label }
   return (
     <Card className="gap-4 p-4 sm:p-5">
       <div className="flex items-center gap-3">
-        <span aria-hidden className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[var(--gos-blue-light)] text-[var(--gos-blue-text)]">
+        <span aria-hidden className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[var(--gos-primary-light)] text-[var(--gos-primary-text)]">
           <Icon className="size-5" />
         </span>
         <div className="min-w-0">

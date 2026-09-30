@@ -17,7 +17,7 @@ export function EmployeeCard({ month, onBack }: Props): React.JSX.Element {
   const { employee, balance, entries } = month;
   return (
     <div className="animate-fade-in-up flex flex-col gap-4">
-      <Card className="gap-3 bg-[linear-gradient(180deg,var(--gos-blue-light),var(--gos-surface)_10rem)] p-4 sm:p-6">
+      <Card className="gap-3 bg-[linear-gradient(180deg,var(--gos-primary-light),var(--gos-surface)_10rem)] p-4 sm:p-6">
         <BackToSearch onBack={onBack} />
         <div className="grid gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-8">
           <EmployeeProfile month={month} />

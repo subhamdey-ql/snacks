@@ -12,7 +12,7 @@ interface FormDialogHeaderProps {
 export function FormDialogHeader({ icon: Icon, title, description }: FormDialogHeaderProps): React.JSX.Element {
   return (
     <DialogHeader className="flex-row items-start gap-3 pr-10">
-      <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--gos-blue-light)] text-[var(--gos-blue-text)]">
+      <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[var(--gos-primary-light)] text-[var(--gos-primary-text)]">
         <Icon className="size-5" />
       </span>
       <div className="flex min-w-0 flex-col gap-1">

@@ -19,7 +19,7 @@ export function EntryItem({ entry: e, disabled, onUndo }: Props): React.JSX.Elem
         aria-hidden
         className={cn(
           "absolute top-1/2 left-[5px] size-3 -translate-y-1/2 rounded-full border-2",
-          voided ? "border-[var(--gos-neutral)] bg-[var(--gos-surface)]" : "border-[var(--gos-blue)] bg-[var(--gos-blue)]",
+          voided ? "border-[var(--gos-neutral)] bg-[var(--gos-surface)]" : "border-[var(--gos-primary)] bg-[var(--gos-primary)]",
         )}
       />
       <div className={cn("flex min-w-0 flex-1 flex-col gap-0.5", voided && "text-[var(--gos-text-muted)] line-through")}>

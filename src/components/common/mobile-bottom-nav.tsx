@@ -24,10 +24,10 @@ export function MobileBottomNav(): React.JSX.Element {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "flex min-h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium transition-colors duration-150 outline-none focus-visible:bg-[var(--gos-surface-muted)]",
-                  active ? "text-[var(--gos-blue-text)]" : "text-[var(--gos-text-muted)]",
+                  active ? "text-[var(--gos-primary-text)]" : "text-[var(--gos-text-muted)]",
                 )}
               >
-                <span className={cn("flex h-7 w-12 items-center justify-center rounded-full transition-colors duration-150", active && "bg-[var(--gos-blue-light)]")}>
+                <span className={cn("flex h-7 w-12 items-center justify-center rounded-full transition-colors duration-150", active && "bg-[var(--gos-primary-light)]")}>
                   <Icon className="size-5" aria-hidden />
                 </span>
                 {label}

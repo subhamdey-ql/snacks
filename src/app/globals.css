@@ -56,43 +56,60 @@
  * variables further down are mapped onto them so every shadcn primitive re-themes with them.
  */
 :root {
+  /* Brand blue: kept as the "info" tint (type badges, info notices). Actions use --gos-primary below. */
   --gos-blue: #094ed2;
   --gos-blue-dark: #073b9e;
   --gos-blue-darker: #031b4a;
   --gos-blue-light: #e6edfb;
   /* Blue used as TEXT (active nav, links). Same as --gos-blue in light; lifted in dark for contrast. */
   --gos-blue-text: #094ed2;
-  --gos-yellow: #ffc938;
-  --gos-yellow-light: #fffaeb;
+  /* Food palette. Primary = chilli-tomato (actions, active nav, focus). The blue tokens above now only tint "info". */
+  --gos-primary: #d13b1e;
+  --gos-primary-dark: #a82c14;
+  --gos-primary-light: #ffeee6;
+  /* Primary used as TEXT on light surfaces (active nav, links): a touch deeper for contrast. */
+  --gos-primary-text: #b5300f;
+  --gos-overlay: rgba(45, 29, 20, 0.38);
+  /* Mango: credits, prices, the logo tile. */
+  --gos-yellow: #ffbf2f;
+  --gos-yellow-light: #fff6de;
   /* Ink for content sitting ON the yellow (brand tile); stays dark in both themes. */
-  --gos-on-yellow: #4a3300;
-  --gos-orange: #f79009;
-  --gos-orange-light: #fef4e6;
-  --gos-green: #12b76a;
-  --gos-green-light: #e7f8f0;
-  --gos-red: #dc2626;
-  --gos-red-light: #feeceb;
-  --gos-neutral: #a2a8bd;
-  --gos-neutral-light: #f6f6f8;
-  --gos-neutral-darker: #393b42;
-  --gos-page-bg: #f0f2f7;
+  --gos-on-yellow: #4a2f00;
+  /* Amber: warnings and "running low". */
+  --gos-orange: #ea8a12;
+  --gos-orange-light: #fff1dc;
+  /* Herb green: success, healthy balance, "Active". */
+  --gos-green: #2e9e5b;
+  --gos-green-light: #e5f6ec;
+  /* Berry: errors and "critical". */
+  --gos-red: #c81e4a;
+  --gos-red-light: #fde8ee;
+  --gos-neutral: #a8917f;
+  --gos-neutral-light: #fbf1e6;
+  --gos-neutral-darker: #2d1d14;
+  --gos-page-bg: #fff7ee;
 
+  /* Semantic surfaces used across the app (warm cream + white cards). */
   --gos-surface: #ffffff;
-  --gos-surface-muted: #f6f6f8;
-  --gos-border: #e4e7ef;
-  --gos-text: #1d2433;
-  --gos-text-muted: #636b80;
-  --gos-hero-from: #094ed2;
-  --gos-hero-to: #2f7bf5;
-  /* Very faint blue wash in the page's top-left corner. */
-  --gos-page-wash: rgba(9, 78, 210, 0.07);
+  --gos-surface-muted: #fbf1e6;
+  --gos-border: #efdfcf;
+  --gos-text: #2d1d14;
+  --gos-text-muted: #7d6757;
+  /* Text/outlines on the gradient banners (white; the yellow Snacks banner switches to dark ink). */
+  --gos-hero-ink: #ffffff;
+  --gos-hero-ink-muted: rgba(255, 255, 255, 0.82);
+  /* Hero / login banner gradient: tangerine into tomato. */
+  --gos-hero-from: #e85d14;
+  --gos-hero-to: #c42f1e;
+  /* Soft mango glow in the page's top-left corner. */
+  --gos-page-wash: rgba(255, 191, 47, 0.14);
 
   --gos-r-card: 12px;
   --gos-r-btn: 8px;
   --gos-r-pill: 20px;
-  --gos-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 8px 24px rgba(16, 24, 40, 0.06);
-  --gos-shadow-lg: 0 2px 4px rgba(16, 24, 40, 0.06), 0 16px 40px rgba(16, 24, 40, 0.12);
-  --gos-shadow-btn: 0 1px 2px rgba(9, 78, 210, 0.25), 0 4px 12px rgba(9, 78, 210, 0.18);
+  --gos-shadow: 0 1px 2px rgba(74, 40, 20, 0.06), 0 8px 24px rgba(74, 40, 20, 0.07);
+  --gos-shadow-lg: 0 2px 4px rgba(74, 40, 20, 0.07), 0 16px 40px rgba(74, 40, 20, 0.14);
+  --gos-shadow-btn: 0 1px 2px rgba(168, 44, 20, 0.28), 0 4px 12px rgba(209, 59, 30, 0.22);
 
   --radius: 0.625rem;
 }
@@ -103,68 +120,74 @@
   --gos-blue-darker: #c9d8fb;
   --gos-blue-light: rgba(47, 107, 230, 0.18);
   --gos-blue-text: #85abf7;
-  --gos-yellow: #ffc938;
-  --gos-yellow-light: rgba(255, 201, 56, 0.12);
-  --gos-orange: #fdb022;
-  --gos-orange-light: rgba(247, 144, 9, 0.15);
-  --gos-green: #32d583;
-  --gos-green-light: rgba(50, 213, 131, 0.14);
-  --gos-red: #f97066;
-  --gos-red-light: rgba(249, 112, 102, 0.14);
-  --gos-neutral: #6b7390;
-  --gos-neutral-light: #1b2238;
-  /* Used as body text in light mode, so it flips to the light text colour here. */
-  --gos-neutral-darker: #e8ebf5;
-  --gos-page-bg: #0d1220;
+  /* Warm espresso dark theme. */
+  --gos-primary: #d4431a;
+  --gos-primary-dark: #b23412;
+  --gos-primary-light: rgba(232, 93, 20, 0.18);
+  --gos-primary-text: #ff9b72;
+  --gos-overlay: rgba(0, 0, 0, 0.6);
+  --gos-yellow: #ffbf2f;
+  --gos-yellow-light: rgba(255, 191, 47, 0.13);
+  --gos-orange: #ffb02e;
+  --gos-orange-light: rgba(234, 138, 18, 0.16);
+  --gos-green: #4cc084;
+  --gos-green-light: rgba(76, 192, 132, 0.14);
+  --gos-red: #ff7a93;
+  --gos-red-light: rgba(255, 122, 147, 0.14);
+  --gos-neutral: #8a7565;
+  --gos-neutral-light: #2a1f19;
+  --gos-neutral-darker: #f5e9dd;
+  --gos-page-bg: #16100d;
 
-  --gos-surface: #151b2d;
-  --gos-surface-muted: #1b2238;
-  --gos-border: #26304a;
-  --gos-text: #e8ebf5;
-  --gos-text-muted: #9aa3bd;
-  --gos-hero-from: #0b3aa6;
-  --gos-hero-to: #1f5fd6;
-  --gos-page-wash: rgba(47, 107, 230, 0.12);
+  --gos-surface: #211813;
+  --gos-surface-muted: #2a1f19;
+  --gos-border: #3b2b22;
+  --gos-text: #f5e9dd;
+  --gos-text-muted: #b9a494;
+  --gos-hero-from: #b84a12;
+  --gos-hero-to: #8f2418;
+  --gos-page-wash: rgba(255, 191, 47, 0.07);
 
-  --gos-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.28);
-  --gos-shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 16px 40px rgba(0, 0, 0, 0.45);
-  --gos-shadow-btn: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(47, 107, 230, 0.25);
+  --gos-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.32);
+  --gos-shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.45), 0 16px 40px rgba(0, 0, 0, 0.5);
+  --gos-shadow-btn: 0 1px 2px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(212, 67, 26, 0.3);
 }
 
 /* shadcn variables, defined once in terms of the tokens above so they follow light/dark. */
 :root,
-.dark {
+.dark,
+body {
   --background: var(--gos-surface);
   --foreground: var(--gos-text);
   --card: var(--gos-surface);
   --card-foreground: var(--gos-text);
   --popover: var(--gos-surface);
   --popover-foreground: var(--gos-text);
-  --primary: var(--gos-blue);
+  --primary: var(--gos-primary);
   --primary-foreground: #ffffff;
   --secondary: var(--gos-surface-muted);
   --secondary-foreground: var(--gos-text);
   --muted: var(--gos-surface-muted);
   --muted-foreground: var(--gos-text-muted);
-  --accent: var(--gos-blue-light);
-  --accent-foreground: var(--gos-blue-text);
+  --accent: var(--gos-primary-light);
+  --accent-foreground: var(--gos-primary-text);
   --destructive: var(--gos-red);
   --border: var(--gos-border);
   --input: var(--gos-border);
-  --ring: var(--gos-blue);
-  --chart-1: var(--gos-blue);
+  --ring: var(--gos-primary);
+  --chart-1: var(--gos-primary);
   --chart-2: var(--gos-yellow);
   --chart-3: var(--gos-green);
   --chart-4: var(--gos-orange);
   --chart-5: var(--gos-neutral);
   --sidebar: var(--gos-surface);
   --sidebar-foreground: var(--gos-text);
-  --sidebar-primary: var(--gos-blue);
+  --sidebar-primary: var(--gos-primary);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: var(--gos-blue-light);
-  --sidebar-accent-foreground: var(--gos-blue-text);
+  --sidebar-accent: var(--gos-primary-light);
+  --sidebar-accent-foreground: var(--gos-primary-text);
   --sidebar-border: var(--gos-border);
-  --sidebar-ring: var(--gos-blue);
+  --sidebar-ring: var(--gos-primary);
 }
 
 @layer base {
@@ -235,4 +258,141 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ---- User-selectable palettes ----
+ * The default (no attribute) is FOOD, defined in :root / .dark above. The theme menu sets data-palette on <html>
+ * (stored in the browser); these blocks override the same tokens. Light/dark stays the separate `.dark` class. */
+
+/* Palette swatches shown in the theme menu. */
+:root {
+  --gos-swatch-food: #d13b1e;
+  --gos-swatch-blue: #094ed2;
+  --gos-swatch-plain: #3f3f46;
+}
+
+/* BLUE: the original brand-blue look, light */
+html[data-palette="blue"] {
+  --gos-primary: #094ed2;
+  --gos-primary-dark: #073b9e;
+  --gos-primary-light: #e6edfb;
+  --gos-primary-text: #094ed2;
+  --gos-overlay: rgba(3, 27, 74, 0.3);
+  --gos-yellow: #ffc938;
+  --gos-yellow-light: #fffaeb;
+  --gos-on-yellow: #4a3300;
+  --gos-orange: #f79009;
+  --gos-orange-light: #fef4e6;
+  --gos-green: #12b76a;
+  --gos-green-light: #e7f8f0;
+  --gos-red: #dc2626;
+  --gos-red-light: #feeceb;
+  --gos-neutral: #a2a8bd;
+  --gos-neutral-light: #f6f6f8;
+  --gos-neutral-darker: #393b42;
+  --gos-page-bg: #f0f2f7;
+  --gos-surface: #ffffff;
+  --gos-surface-muted: #f6f6f8;
+  --gos-border: #e4e7ef;
+  --gos-text: #1d2433;
+  --gos-text-muted: #636b80;
+  --gos-hero-from: #094ed2;
+  --gos-hero-to: #2f7bf5;
+  --gos-page-wash: rgba(9, 78, 210, 0.07);
+  --gos-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --gos-shadow-lg: 0 2px 4px rgba(16, 24, 40, 0.06), 0 16px 40px rgba(16, 24, 40, 0.12);
+  --gos-shadow-btn: 0 1px 2px rgba(9, 78, 210, 0.25), 0 4px 12px rgba(9, 78, 210, 0.18);
+}
+/* BLUE, dark (navy) */
+html.dark[data-palette="blue"] {
+  --gos-primary: #2f6be6;
+  --gos-primary-dark: #2458c4;
+  --gos-primary-light: rgba(47, 107, 230, 0.18);
+  --gos-primary-text: #85abf7;
+  --gos-overlay: rgba(0, 0, 0, 0.6);
+  --gos-yellow-light: rgba(255, 201, 56, 0.12);
+  --gos-orange: #fdb022;
+  --gos-orange-light: rgba(247, 144, 9, 0.15);
+  --gos-green: #32d583;
+  --gos-green-light: rgba(50, 213, 131, 0.14);
+  --gos-red: #f97066;
+  --gos-red-light: rgba(249, 112, 102, 0.14);
+  --gos-neutral: #6b7390;
+  --gos-neutral-light: #1b2238;
+  --gos-neutral-darker: #e8ebf5;
+  --gos-page-bg: #0d1220;
+  --gos-surface: #151b2d;
+  --gos-surface-muted: #1b2238;
+  --gos-border: #26304a;
+  --gos-text: #e8ebf5;
+  --gos-text-muted: #9aa3bd;
+  --gos-hero-from: #0b3aa6;
+  --gos-hero-to: #1f5fd6;
+  --gos-page-wash: rgba(47, 107, 230, 0.12);
+  --gos-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px rgba(0, 0, 0, 0.28);
+  --gos-shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.4), 0 16px 40px rgba(0, 0, 0, 0.45);
+  --gos-shadow-btn: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(47, 107, 230, 0.25);
+}
+
+/* PLAIN: neutral white and grey with a graphite accent, light */
+html[data-palette="plain"] {
+  --gos-primary: #3f3f46;
+  --gos-primary-dark: #27272a;
+  --gos-primary-light: #f1f1f3;
+  --gos-primary-text: #27272a;
+  --gos-overlay: rgba(24, 24, 27, 0.35);
+  --gos-yellow: #ffc938;
+  --gos-yellow-light: #fffaeb;
+  --gos-on-yellow: #4a3300;
+  --gos-orange: #f79009;
+  --gos-orange-light: #fef4e6;
+  --gos-green: #12b76a;
+  --gos-green-light: #e7f8f0;
+  --gos-red: #dc2626;
+  --gos-red-light: #feeceb;
+  --gos-neutral: #a1a1aa;
+  --gos-neutral-light: #f4f4f5;
+  --gos-neutral-darker: #27272a;
+  --gos-page-bg: #f7f7f8;
+  --gos-surface: #ffffff;
+  --gos-surface-muted: #f1f1f3;
+  --gos-border: #e4e4e7;
+  --gos-text: #18181b;
+  --gos-text-muted: #71717a;
+  --gos-hero-from: #52525b;
+  --gos-hero-to: #27272a;
+  --gos-page-wash: rgba(24, 24, 27, 0.04);
+  --gos-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --gos-shadow-lg: 0 2px 4px rgba(16, 24, 40, 0.06), 0 16px 40px rgba(16, 24, 40, 0.12);
+  --gos-shadow-btn: 0 1px 2px rgba(24, 24, 27, 0.25), 0 4px 12px rgba(24, 24, 27, 0.18);
+}
+/* PLAIN, dark */
+html.dark[data-palette="plain"] {
+  --gos-primary: #52525b;
+  --gos-primary-dark: #3f3f46;
+  --gos-primary-light: rgba(161, 161, 170, 0.18);
+  --gos-primary-text: #d4d4d8;
+  --gos-overlay: rgba(0, 0, 0, 0.6);
+  --gos-yellow-light: rgba(255, 201, 56, 0.12);
+  --gos-orange: #fdb022;
+  --gos-orange-light: rgba(247, 144, 9, 0.15);
+  --gos-green: #32d583;
+  --gos-green-light: rgba(50, 213, 131, 0.14);
+  --gos-red: #f97066;
+  --gos-red-light: rgba(249, 112, 102, 0.14);
+  --gos-neutral: #71717a;
+  --gos-neutral-light: #1f1f25;
+  --gos-neutral-darker: #f2f2f5;
+  --gos-page-bg: #0e0e11;
+  --gos-surface: #17171b;
+  --gos-surface-muted: #1f1f25;
+  --gos-border: #2c2c33;
+  --gos-text: #f2f2f5;
+  --gos-text-muted: #a0a0ab;
+  --gos-hero-from: #3f3f46;
+  --gos-hero-to: #18181b;
+  --gos-page-wash: rgba(255, 255, 255, 0.03);
+  --gos-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.32);
+  --gos-shadow-lg: 0 2px 4px rgba(0, 0, 0, 0.45), 0 16px 40px rgba(0, 0, 0, 0.5);
+  --gos-shadow-btn: 0 1px 2px rgba(0, 0, 0, 0.45), 0 4px 12px rgba(0, 0, 0, 0.3);
 }
