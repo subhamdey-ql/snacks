@@ -1,4 +1,5 @@
 import { type FieldValues, type Path, type ControllerRenderProps } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import { SelectField } from "@/components/common/select-field";
 import { Input } from "@/components/common/Input/Input";
 import React from "react";
@@ -81,14 +82,16 @@ export function RenderFormInput<TData extends FieldValues>({ field, sectionField
 						className="pr-12"
 						{...field}
 					/>
-					<button
+					<Button
 						type="button"
+						variant="ghost"
+						size="icon"
 						aria-label={sectionField.showPassword ? "Hide password" : "Show password"}
 						onClick={sectionField.handlePasswordVisibility}
-						className="absolute right-0 flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-transparent hover:text-foreground"
+						className="absolute right-0 size-11 text-muted-foreground hover:bg-transparent hover:text-foreground dark:hover:bg-transparent"
 					>
 						{sectionField.showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-					</button>
+					</Button>
 				</div>
 			);
 		case "selectField":

@@ -10,6 +10,7 @@ import {
 	useFormContext,
 } from "react-hook-form";
 
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
 
@@ -82,7 +83,8 @@ FormItem.displayName = "FormItem";
 const FormLabel = React.forwardRef<HTMLLabelElement, LabelProps>(({ className, ...props }, ref) => {
 	const { formItemId } = useFormField();
 
-	return <label ref={ref} className={cn("text-foreground", className)} htmlFor={formItemId} {...props} />;
+	// shadcn Label with its small/medium-weight defaults reset so the field labels keep their original look.
+	return <Label ref={ref} className={cn("block text-[length:inherit] leading-[inherit] font-[weight:inherit] text-foreground", className)} htmlFor={formItemId} {...props} />;
 });
 FormLabel.displayName = "FormLabel";
 

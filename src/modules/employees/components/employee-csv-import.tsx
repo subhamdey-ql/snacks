@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Label } from "@/components/ui/label";
 import { FileSpreadsheet, Upload } from "lucide-react";
 import { CommonButton } from "@/components/common/common-button";
 import { Input } from "@/components/ui/input";
@@ -29,9 +30,9 @@ export function EmployeeCsvImport(): React.JSX.Element {
           <FileSpreadsheet className="size-5" />
         </span>
         <div className="min-w-0">
-          <label htmlFor={EMPLOYEE_CSV_INPUT_ID} className="font-semibold text-[var(--gos-text)]">
+          <Label htmlFor={EMPLOYEE_CSV_INPUT_ID} className="block text-[length:inherit] leading-[inherit] font-semibold text-[var(--gos-text)]">
             Import from a CSV file
-          </label>
+          </Label>
           <p className="text-sm text-[var(--gos-text-muted)] [overflow-wrap:anywhere]">
             One employee per line: <span className="font-medium text-[var(--gos-text)]">code,name,WFO|HYBRID</span>. Up to 1 MB and 5000 rows.
           </p>

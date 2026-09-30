@@ -1,22 +1,21 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 
+import { Input as UiInput } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-const inputVariants = cva(
-	"flex w-full max-w-[650px] rounded-xl bg-[var(--gos-surface)] px-3.5 py-2 h-11 text-base border border-input transition-[color,box-shadow,border-color] duration-150 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/20 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
-	{
-		defaultVariants: {
-			variant: "default",
+// Only what the form kit adds on top of shadcn's Input: the 650px cap, 2-line-safe padding and placeholder sizing.
+const inputVariants = cva("max-w-[650px] py-2 disabled:cursor-not-allowed disabled:opacity-50", {
+	defaultVariants: {
+		variant: "default",
+	},
+	variants: {
+		variant: {
+			accent: "bg-accent/10 placeholder:text-xs placeholder:font-light",
+			default: "placeholder:text-xs",
 		},
-		variants: {
-			variant: {
-				accent: "bg-accent/10 placeholder:text-xs placeholder:font-light",
-				default: "placeholder:text-xs",
-			},
-		},
-	}
-);
+	},
+});
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {
 	PrefixIcon?: React.ReactNode;
@@ -29,7 +28,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 		return (
 			<div className={cn("flex w-full items-center", inputContainerClassName)}>
 				{PrefixIcon && <div className={cn("pl-3", prefixIconClassName)}>{PrefixIcon}</div>}
-				<input type={type} className={cn(inputVariants({ className, variant }))} ref={ref} {...props} />
+				<UiInput type={type} className={cn(inputVariants({ className, variant }))} ref={ref} {...props} />
 			</div>
 		);
 	}

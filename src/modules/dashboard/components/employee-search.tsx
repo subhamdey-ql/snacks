@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 import { Search } from "lucide-react";
 import { CommonLoader } from "@/components/common/common-loader";
 import { Input } from "@/components/ui/input";
@@ -13,7 +15,7 @@ interface Props {
 }
 
 // Status messages sit on a surface card so they stay readable on the hero gradient.
-const NOTE = "rounded-2xl bg-[var(--gos-surface)] py-4 text-center text-sm shadow-[var(--gos-shadow)]";
+const NOTE = "gap-0 overflow-visible rounded-2xl border-0 bg-[var(--gos-surface)] py-4 text-center text-sm";
 
 export function EmployeeSearch({ onSelect }: Props): React.JSX.Element {
   const [text, setText] = useState("");
@@ -24,7 +26,7 @@ export function EmployeeSearch({ onSelect }: Props): React.JSX.Element {
 
   return (
     <div className="flex flex-col gap-3">
-      <label htmlFor="employee-search" className="sr-only">Search employee name or code</label>
+      <Label htmlFor="employee-search" className="sr-only">Search employee name or code</Label>
       <div className="relative">
         <Search className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-[var(--gos-text-muted)]" aria-hidden />
         <Input
@@ -37,9 +39,9 @@ export function EmployeeSearch({ onSelect }: Props): React.JSX.Element {
           className="h-14 rounded-2xl border-transparent bg-[var(--gos-surface)] pl-12 text-base text-[var(--gos-text)] shadow-[var(--gos-shadow-lg)] md:text-lg focus-visible:border-transparent focus-visible:ring-4 focus-visible:ring-[var(--gos-yellow)]/70"
         />
       </div>
-      {showResults && isError && <p className={`${NOTE} text-[var(--gos-red)]`}>Could not load employees. Try again.</p>}
-      {showResults && isFetching && <div className={NOTE}><CommonLoader /></div>}
-      {showResults && !isFetching && data?.data.length === 0 && <p className={`${NOTE} text-[var(--gos-text-muted)]`}>No employee found.</p>}
+      {showResults && isError && <Card className={`${NOTE} text-[var(--gos-red)]`}>Could not load employees. Try again.</Card>}
+      {showResults && isFetching && <Card className={NOTE}><CommonLoader /></Card>}
+      {showResults && !isFetching && data?.data.length === 0 && <Card className={`${NOTE} text-[var(--gos-text-muted)]`}>No employee found.</Card>}
       {showResults && (
         <div className="stagger flex flex-col gap-2">
           {data?.data.map((e) => <SearchResultItem key={e.id} employee={e} onSelect={onSelect} />)}

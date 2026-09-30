@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ACCENT_CLASSES } from "@/components/common/accent-classes";
 import { cn, initials } from "@/lib/utils";
 import { AccentTone } from "@/types/enums";
@@ -17,11 +18,9 @@ export function UserAvatar({ name, seed, className }: UserAvatarProps): React.JS
   for (const ch of seed) hash = (hash * 31 + ch.charCodeAt(0)) >>> 0;
   const tone = TONES[hash % TONES.length] ?? AccentTone.BLUE;
   return (
-    <span
-      aria-hidden
-      className={cn("flex size-10 shrink-0 items-center justify-center rounded-full text-sm font-bold", ACCENT_CLASSES[tone], className)}
-    >
-      {initials(name)}
-    </span>
+    // Avatar's inner ring (after:) is switched off and the fallback takes the accent colours, so the look is unchanged.
+    <Avatar aria-hidden className={cn("size-10 after:hidden", className)}>
+      <AvatarFallback className={cn("text-sm font-bold", ACCENT_CLASSES[tone])}>{initials(name)}</AvatarFallback>
+    </Avatar>
   );
 }

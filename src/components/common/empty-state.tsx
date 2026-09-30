@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty";
 
 interface EmptyStateProps {
   readonly title: string;
@@ -7,16 +8,23 @@ interface EmptyStateProps {
 }
 
 // Centred "nothing here yet" block: optional icon in a soft circle, a title, an optional hint.
+// Empty's defaults (padding, balanced wrapping, max width, 32px icon tile) are overridden to keep the original look.
 export function EmptyState({ title, icon: Icon, hint }: EmptyStateProps): React.JSX.Element {
   return (
-    <div className="flex flex-col items-center gap-2 py-6 text-center">
-      {Icon && (
-        <span aria-hidden className="mb-1 flex size-12 items-center justify-center rounded-full bg-[var(--gos-surface-muted)] text-[var(--gos-text-muted)]">
-          <Icon className="size-6" />
-        </span>
-      )}
-      <p className="text-sm font-medium text-[var(--gos-text)]">{title}</p>
-      {hint && <p className="text-sm text-[var(--gos-text-muted)]">{hint}</p>}
-    </div>
+    <Empty className="flex-none gap-2 p-0 py-6 text-wrap">
+      <EmptyHeader className="max-w-none gap-2">
+        {Icon && (
+          <EmptyMedia
+            variant="icon"
+            aria-hidden
+            className="mb-1 size-12 rounded-full bg-[var(--gos-surface-muted)] text-[var(--gos-text-muted)] [&_svg:not([class*='size-'])]:size-6"
+          >
+            <Icon className="size-6" />
+          </EmptyMedia>
+        )}
+        <EmptyTitle className="font-sans text-sm font-medium tracking-normal text-[var(--gos-text)]">{title}</EmptyTitle>
+        {hint && <EmptyDescription className="text-sm/normal text-[var(--gos-text-muted)]">{hint}</EmptyDescription>}
+      </EmptyHeader>
+    </Empty>
   );
 }

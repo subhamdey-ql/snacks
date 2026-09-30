@@ -1,4 +1,5 @@
 import { AlertTriangle, CircleSlash, Info, CircleCheck, type LucideIcon } from "lucide-react";
+import { Alert } from "@/components/ui/alert";
 import { cn } from "@/lib/utils";
 import { BadgeTone } from "@/types/enums";
 
@@ -23,9 +24,16 @@ interface InlineNoticeProps {
 export function InlineNotice({ tone, children, icon, className }: InlineNoticeProps): React.JSX.Element {
   const Icon = icon ?? TONE[tone].icon;
   return (
-    <p className={cn("flex items-start gap-2.5 rounded-xl p-3 text-sm", TONE[tone].className, className)}>
+    // Alert's default border, grid layout and icon offset are overridden so the callout looks exactly as before.
+    <Alert
+      className={cn(
+        "flex items-start gap-2.5 rounded-xl border-0 p-3 text-sm has-[>svg]:gap-x-2.5 *:[svg]:translate-y-0",
+        TONE[tone].className,
+        className,
+      )}
+    >
       <Icon className="mt-0.5 size-4 shrink-0" aria-hidden />
       <span className="min-w-0">{children}</span>
-    </p>
+    </Alert>
   );
 }

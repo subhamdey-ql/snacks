@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { ACCENT_CLASSES } from "@/components/common/accent-classes";
+import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import type { AccentTone } from "@/types/enums";
@@ -15,7 +16,7 @@ interface StatCardProps {
 // Icon + big numeral + label. Compact and stacked on phones (3-up fits at 375px), icon beside the number from sm.
 export function StatCard({ icon: Icon, label, value, tone }: StatCardProps): React.JSX.Element {
   return (
-    <div className="flex min-w-0 flex-col gap-2 rounded-2xl border border-[var(--gos-border)] bg-[var(--gos-surface)] p-3 shadow-[var(--gos-shadow)] sm:flex-row sm:items-center sm:gap-4 sm:p-5">
+    <Card className="min-w-0 gap-2 overflow-visible bg-[var(--gos-surface)] p-3 text-base sm:flex-row sm:items-center sm:gap-4 sm:p-5">
       <span aria-hidden className={cn("flex size-9 shrink-0 items-center justify-center rounded-full sm:size-12", ACCENT_CLASSES[tone])}>
         <Icon className="size-4 sm:size-6" />
       </span>
@@ -27,6 +28,6 @@ export function StatCard({ icon: Icon, label, value, tone }: StatCardProps): Rea
         )}
         <span className="block text-xs leading-tight text-[var(--gos-text-muted)] sm:text-sm">{label}</span>
       </div>
-    </div>
+    </Card>
   );
 }
