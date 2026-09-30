@@ -1,7 +1,8 @@
-import { Cookie } from "lucide-react";
+import { LogoGlyph } from "@/components/common/brand-mark";
+import { BRAND_NAME, BRAND_POWERED_BY, BRAND_TAGLINE } from "@/lib/brand";
 import { FoodPattern } from "@/components/common/food-pattern";
 
-// Brand side of the login screen: hero gradient, the tilted yellow cookie tile, tagline and soft shapes.
+// Brand side of the login screen: hero gradient, the tilted logo tile, tagline and soft shapes.
 // Compact banner on phones (the login card overlaps its bottom edge); full-height left panel from lg.
 export function LoginBrandPanel(): React.JSX.Element {
   return (
@@ -13,15 +14,16 @@ export function LoginBrandPanel(): React.JSX.Element {
       <div aria-hidden className="pointer-events-none absolute top-1/3 right-10 hidden size-10 rotate-12 rounded-xl bg-[var(--gos-yellow)] shadow-[var(--gos-shadow-lg)] lg:block" />
       <div aria-hidden className="pointer-events-none absolute right-24 bottom-24 hidden size-5 -rotate-12 rounded-md bg-white/25 lg:block" />
       <div className="relative mx-auto flex max-w-sm flex-col items-center gap-4 text-center lg:mx-0 lg:max-w-md lg:items-start lg:gap-6 lg:text-left">
-        <span aria-hidden className="flex size-14 -rotate-6 items-center justify-center rounded-2xl bg-[var(--gos-yellow)] text-[var(--gos-on-yellow)] shadow-[var(--gos-shadow-lg)] lg:size-20 lg:rounded-3xl">
-          <Cookie className="size-7 lg:size-10" strokeWidth={2.25} />
+        <span aria-hidden className="flex size-14 -rotate-6 items-center justify-center rounded-2xl bg-white/20 p-1 shadow-[var(--gos-shadow-lg)] ring-1 ring-white/40 backdrop-blur-sm lg:size-20 lg:rounded-3xl lg:p-1.5">
+          <LogoGlyph />
         </span>
         <div>
-          <p className="text-sm font-semibold text-white/75 lg:text-base">Snacks credit tracker</p>
+          <p className="text-sm font-semibold text-white/75 lg:text-base">{BRAND_NAME} · {BRAND_TAGLINE}</p>
           <p className="mt-1 text-2xl font-bold tracking-tight lg:text-5xl lg:leading-tight">Track every snack, effortlessly</p>
           <p className="mt-4 hidden text-base text-white/80 lg:block">
             Record what the team takes from the counter and keep every monthly allowance in check.
           </p>
+          <p className="mt-4 text-xs font-semibold tracking-wide text-white/70 uppercase lg:mt-6">{BRAND_POWERED_BY}</p>
         </div>
       </div>
     </section>

@@ -3,14 +3,15 @@ import { FoodBackdrop } from "@/components/common/food-backdrop";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 import { AppProviders } from "@/components/providers/app-providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Snacks Tracker",
-  description: "Snacks credit tracker",
+  title: BRAND_NAME,
+  description: `${BRAND_NAME} ${BRAND_TAGLINE}`,
 };
 
 // viewport-fit=cover lets the page draw under notches/home bars; the shell pads itself with env(safe-area-inset-*).
