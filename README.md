@@ -56,7 +56,7 @@ The app will not deactivate an admin, and without at least one admin row nobody 
 1. Create a Postgres database on Neon (or Supabase) and copy its connection string.
 2. Push the repo and import it into Vercel.
 3. Use the DIRECT (non-pooled) connection string for `DATABASE_URL` (Neon: the host without `-pooler`; Supabase: the direct connection or the session-mode pooler, not the transaction pooler on port 6543). `prisma migrate deploy` and the interactive transactions (`FOR UPDATE`) need a real session; `?pgbouncer=true` is not enough for interactive transactions. Set `DATABASE_URL`, `SESSION_SECRET`, `RESEND_API_KEY` and `EMAIL_FROM` in Vercel. In Resend, verify the sending domain (a few DNS records) first, or codes will not be delivered.
-4. Set the Vercel build command to `prisma migrate deploy && next build`. The `postinstall` script runs `prisma generate` on install.
+4. Set the Vercel build command to `prisma migrate deploy && pnpm build`. `pnpm build`, `pnpm dev` and `pnpm type-check` all run `prisma generate` first, because Vercel (and pnpm) can reuse a cached `node_modules` whose generated Prisma client is from an older schema, which fails the build with errors like "has no exported member 'UserRole'".
 5. Before the first login, run the admin statement from "Admins" against the database.
 6. After the first deploy, follow the First run steps above.
 
